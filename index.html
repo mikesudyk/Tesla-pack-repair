@@ -194,6 +194,8 @@ th { background: #21262d; }
   margin-top: 6px;
   display: block;
 }
+ul { margin: 8px 0; padding-left: 18px; }
+li { margin-bottom: 6px; }
 footer { text-align: center; color: var(--muted); font-size: 0.75rem; margin-top: 24px; padding-top: 12px; border-top: 1px solid var(--border); }
 @media (max-width: 480px) {
   .module-grid { grid-template-columns: repeat(4, 1fr); }
@@ -214,6 +216,7 @@ footer { text-align: center; color: var(--muted); font-size: 0.75rem; margin-top
   <button data-tab="pack">Pack Health</button>
   <button data-tab="tbmm">TBMM Testing</button>
   <button data-tab="faults">Fault Codes</button>
+  <button data-tab="explanations">Explanations</button>
   <button data-tab="timeline">Timeline</button>
   <button data-tab="pages">Pages</button>
 </nav>
@@ -360,6 +363,54 @@ footer { text-align: center; color: var(--muted); font-size: 0.75rem; margin-top
     <p><strong>Primary:</strong> Pyro fuse cover (1020227-00-C) gasket failure → water entry. Confirmed water + corrosion in cavity.</p>
     <p><strong>Pyro fuse identified:</strong> ASY,FUSE,HVBAT,HI DURA,83 • TPN 1053124-00-A • TSN T15E0022094.</p>
     <p>Contributing: deep discharge, 12V failure, charge port door swap without relearn, BMB connector corrosion.</p>
+  </div>
+</div>
+
+<!-- EXPLANATIONS -->
+<div id="explanations" class="section">
+  <div class="card">
+    <h2>What “Connector Issue” Means</h2>
+    <p>On Module 12 the site notes a <strong>connector issue</strong> because the large voltage spread reported by Scan My Tesla disappeared when the module was measured directly with the TBMM.</p>
+    <ul>
+      <li><strong>SMT (June 2026):</strong> Module 12 showed an 81 mV spread.</li>
+      <li><strong>TBMM (direct test):</strong> Same module measured only 4 mV imbalance and PASSed. Cell groups were tightly matched.</li>
+    </ul>
+    <p>The cells themselves were healthy. The BMS was simply reading them incorrectly through the connector / sense-lead path. This is a false or inflated reading, not real cell imbalance.</p>
+  </div>
+
+  <div class="card">
+    <h2>Why This Happens</h2>
+    <p>The BMS reads cell-group voltages through sense leads and BMB (Battery Management Board) connectors. Anything that adds resistance or corrosion in that path can make the BMS report a fake spread even when the cells are fine.</p>
+    <p>Common causes on these packs:</p>
+    <ul>
+      <li>Water intrusion (confirmed in the pyro-fuse cavity on this pack)</li>
+      <li>Corrosion on connector pins or sense wires</li>
+      <li>Loose or high-resistance contacts</li>
+      <li>Damaged or oxidized sense leads</li>
+      <li>BMB board issues that affect voltage sensing (related to BMS_a129)</li>
+    </ul>
+    <p>Module 14 showed the same pattern (low true imbalance on TBMM). Module 16 is the opposite: its 146 mV TBMM result confirmed a real cell-group imbalance.</p>
+  </div>
+
+  <div class="card">
+    <h2>SMT vs TBMM</h2>
+    <ul>
+      <li><strong>SMT</strong> reads through the vehicle’s BMS and the full connector chain. It can show inflated spreads if connectors or sense wiring are bad.</li>
+      <li><strong>TBMM</strong> connects more directly to the module and measures the actual cell groups. A big drop from SMT spread to TBMM spread is strong evidence of a connector/sense problem rather than cell degradation.</li>
+    </ul>
+    <p>Healthy modules typically show ≤ 6 mV imbalance on TBMM. Anything significantly higher is treated as a real issue until proven otherwise.</p>
+  </div>
+
+  <div class="card">
+    <h2>Next Diagnostic Steps</h2>
+    <p>For modules that show a connector-style pattern (high SMT, low TBMM):</p>
+    <ul>
+      <li>Inspect and reseat the BMB connector</li>
+      <li>Check sensor leads for corrosion, damage, or high resistance</li>
+      <li>Visually inspect the BMS circuit board for corrosion or damage</li>
+      <li>Clean contacts and retest</li>
+    </ul>
+    <p>The Physical Inspection table in the TBMM tab is ready to log those results as modules are opened.</p>
   </div>
 </div>
 
