@@ -352,6 +352,21 @@ footer { text-align: center; color: var(--muted); font-size: 0.75rem; margin-top
         <li>Monitor progress on the display or web interface. Retest imbalance after.</li>
       </ul>
     </div>
+    <h3>How to choose the balance point</h3>
+    <p>The balance point is the target voltage the TBMM balances the cell groups toward.</p>
+    <p>For Module 16 (current range ~3.681 V low to 3.827 V high):</p>
+    <ul>
+      <li><strong>3.750 V</strong> — roughly the middle of the current spread</li>
+      <li><strong>3.720–3.740 V</strong> — slightly more conservative (pulls the high groups down more)</li>
+    </ul>
+    <p>General approach:</p>
+    <ul>
+      <li>Look at the live cell-group voltages on the TBMM.</li>
+      <li>Pick a voltage below the highest groups and near or above the lowest ones.</li>
+      <li>Stay comfortably inside the normal range for these modules (roughly 3.6–4.0 V).</li>
+      <li>Set it in the web interface, turn balancing on, and monitor. You can adjust the point later if progress stalls.</li>
+    </ul>
+    <p>After balancing, recheck the imbalance. Goal is ≤ 6 mV to match the pass criteria.</p>
     <p style="color:var(--muted);font-size:0.85rem;">Log balancing sessions and post-balance results here as they are done.</p>
     <div style="overflow-x:auto">
     <table>
