@@ -157,6 +157,40 @@ th { background: #21262d; }
 .module-cell.flat { border-bottom: 3px solid var(--green); }
 .module-cell.low { border-bottom: 3px solid var(--orange); }
 .module-cell.high { border-bottom: 3px solid var(--red); }
+.pages-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 12px;
+}
+.page-card {
+  background: #21262d;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px;
+  text-decoration: none;
+  color: var(--text);
+  display: block;
+  transition: border-color 0.15s;
+}
+.page-card:hover {
+  border-color: var(--accent);
+}
+.page-card h3 {
+  margin: 0 0 6px;
+  color: var(--blue);
+  font-size: 1rem;
+}
+.page-card p {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+.page-card .url {
+  font-size: 0.75rem;
+  color: var(--accent);
+  margin-top: 6px;
+  display: block;
+}
 footer { text-align: center; color: var(--muted); font-size: 0.75rem; margin-top: 24px; padding-top: 12px; border-top: 1px solid var(--border); }
 @media (max-width: 480px) {
   .module-grid { grid-template-columns: repeat(4, 1fr); }
@@ -178,6 +212,7 @@ footer { text-align: center; color: var(--muted); font-size: 0.75rem; margin-top
   <button data-tab="tbmm">TBMM Testing</button>
   <button data-tab="faults">Fault Codes</button>
   <button data-tab="timeline">Timeline</button>
+  <button data-tab="pages">Pages</button>
 </nav>
 
 <!-- DASHBOARD -->
@@ -307,6 +342,41 @@ footer { text-align: center; color: var(--muted); font-size: 0.75rem; margin-top
     <div class="timeline-item"><strong>Sept</strong> — Picked up; decided DIY pack drop.</div>
     <div class="timeline-item"><strong>Oct</strong> — Pack dropped (Vevor jack method), opened. Water in pyro fuse cavity confirmed. Module 12 TBMM: 4 mV PASS. Module 14 TBMM: 3–4 mV PASS (22.51 V, cell groups 3.749–3.753 V, 16.5–16.8 °C).</div>
     <div class="timeline-item"><strong>Next</strong> — TBMM priority modules 7, 6, 9, 16. Order pyro fuse + cover.</div>
+  </div>
+</div>
+
+<!-- PAGES -->
+<div id="pages" class="section">
+  <div class="card">
+    <h2>Related Project Pages</h2>
+    <p style="color:var(--muted);font-size:0.9rem;margin-top:-8px;margin-bottom:14px;">Other sites on 5udyk.com tied to this 85D pack repair and Tesla work.</p>
+    <div class="pages-grid">
+      <a class="page-card" href="https://tpm.5udyk.com/" target="_blank">
+        <h3>Tesla Pack Monitor</h3>
+        <p>DIY diagnostic tool project guide. Portable CAN reader for classic Model S/X packs — brick voltages, temps, and imbalance without a laptop.</p>
+        <span class="url">tpm.5udyk.com</span>
+      </a>
+      <a class="page-card" href="https://battery.5udyk.com/" target="_blank">
+        <h3>85D Pack Drop Guide</h3>
+        <p>Notes for dropping the pack on this 2015 Model S 85D in the driveway using floor jacks instead of a lift.</p>
+        <span class="url">battery.5udyk.com</span>
+      </a>
+      <a class="page-card" href="https://teslapack.5udyk.com/" target="_blank">
+        <h3>Video vs This Pack</h3>
+        <p>Out of Spec battery-failure video mapped onto this car’s Scan My Tesla snapshot so failure modes can be checked in order.</p>
+        <span class="url">teslapack.5udyk.com</span>
+      </a>
+      <a class="page-card" href="https://85d.5udyk.com/" target="_blank">
+        <h3>Auction Dossier</h3>
+        <p>Research dossier on this specific 2015 85D (VIN 5YJSA1H25FF091116) — features, Supercharging, recalls, and risks from the Copart listing.</p>
+        <span class="url">85d.5udyk.com</span>
+      </a>
+      <a class="page-card" href="https://tesla.5udyk.com/" target="_blank">
+        <h3>Tesla Hunter</h3>
+        <p>Search notes for a 2013–2017 Model S with dual motor, rear-facing jump seats, and transferable free Supercharging.</p>
+        <span class="url">tesla.5udyk.com</span>
+      </a>
+    </div>
   </div>
 </div>
 
