@@ -102,6 +102,8 @@ th { background: #21262d; }
 .pass { color: var(--green); font-weight: 600; }
 .fail { color: var(--red); font-weight: 600; }
 .pending { color: var(--muted); }
+.ok { color: var(--green); }
+.issue { color: var(--orange); }
 .progress {
   background: #21262d;
   border-radius: 4px;
@@ -283,7 +285,7 @@ footer { text-align: center; color: var(--muted); font-size: 0.75rem; margin-top
     <div class="highlight">
       <strong>Module 12:</strong> SMT 81 mV → TBMM 4 mV <span class="pass">PASS</span> (connector issue).<br>
       <strong>Module 14:</strong> 22.51 V • 3.749–3.753 V • 3–4 mV • 16.5–16.8 °C • <span class="pass">PASS</span>.<br>
-      <strong>Module 16 (new):</strong> 22.51–22.52 V • cells 3.681–3.827 V (5:3.681 / 6:3.827) • imbalance <span class="fail">146 mV FAIL</span> • temps 11.7 °C. Variance stable (max 1 mV). Real cell-group imbalance confirmed.
+      <strong>Module 16:</strong> 22.51–22.52 V • cells 3.681–3.827 V (5:3.681 / 6:3.827) • imbalance <span class="fail">146 mV FAIL</span> • temps 11.7 °C. Variance stable (max 1 mV). Real cell-group imbalance confirmed.
     </div>
   </div>
   <div class="card">
@@ -301,6 +303,34 @@ footer { text-align: center; color: var(--muted); font-size: 0.75rem; margin-top
         <tr><td>10</td><td>150</td><td class="pending">PENDING</td><td>—</td><td>Medium</td></tr>
         <tr><td>11</td><td>150</td><td class="pending">PENDING</td><td>—</td><td>Medium</td></tr>
         <tr><td>1–5,8,13,15</td><td>1–3</td><td class="pending">PENDING</td><td>—</td><td>Expected PASS</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+  <div class="card">
+    <h2>Physical Inspection (Sensor Leads & BMS Board)</h2>
+    <p style="color:var(--muted);font-size:0.85rem;margin-top:-4px;">Confirmation of visual/physical inspection for sensor leads and the BMS circuit board on each module. Update as modules are opened or inspected.</p>
+    <div style="overflow-x:auto">
+    <table>
+      <thead>
+        <tr>
+          <th>Module</th>
+          <th>Sensor Leads Inspected</th>
+          <th>Sensor Leads Issues</th>
+          <th>BMS Board Inspected</th>
+          <th>BMS Board Issues</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>12</td><td class="pending">PENDING</td><td class="pending">—</td><td class="pending">PENDING</td><td class="pending">—</td></tr>
+        <tr><td>14</td><td class="pending">PENDING</td><td class="pending">—</td><td class="pending">PENDING</td><td class="pending">—</td></tr>
+        <tr><td>16</td><td class="pending">PENDING</td><td class="pending">—</td><td class="pending">PENDING</td><td class="pending">—</td></tr>
+        <tr><td>7</td><td class="pending">PENDING</td><td class="pending">—</td><td class="pending">PENDING</td><td class="pending">—</td></tr>
+        <tr><td>6</td><td class="pending">PENDING</td><td class="pending">—</td><td class="pending">PENDING</td><td class="pending">—</td></tr>
+        <tr><td>9</td><td class="pending">PENDING</td><td class="pending">—</td><td class="pending">PENDING</td><td class="pending">—</td></tr>
+        <tr><td>10</td><td class="pending">PENDING</td><td class="pending">—</td><td class="pending">PENDING</td><td class="pending">—</td></tr>
+        <tr><td>11</td><td class="pending">PENDING</td><td class="pending">—</td><td class="pending">PENDING</td><td class="pending">—</td></tr>
+        <tr><td>1–5, 8, 13, 15</td><td class="pending">PENDING</td><td class="pending">—</td><td class="pending">PENDING</td><td class="pending">—</td></tr>
       </tbody>
     </table>
     </div>
@@ -344,7 +374,7 @@ footer { text-align: center; color: var(--muted); font-size: 0.75rem; margin-top
     <div class="timeline-item"><strong>July</strong> — Ervine’s diagnostic. GLEV remote: water / possible new pack.</div>
     <div class="timeline-item"><strong>Sept</strong> — Picked up; decided DIY pack drop.</div>
     <div class="timeline-item"><strong>Oct</strong> — Pack dropped (Vevor jack method), opened. Water in pyro fuse cavity confirmed. Module 12 TBMM: 4 mV PASS. Module 14 TBMM: 3–4 mV PASS. Module 16 TBMM: 146 mV FAIL (22.51–22.52 V, cells 3.681–3.827 V, 11.7 °C). Pyro fuse TPN 1053124-00-A logged.</div>
-    <div class="timeline-item"><strong>Next</strong> — TBMM priority modules 7, 6, 9. Address Module 16 imbalance and pyro fuse/cover.</div>
+    <div class="timeline-item"><strong>Next</strong> — TBMM priority modules 7, 6, 9. Address Module 16 imbalance and pyro fuse/cover. Inspect sensor leads and BMS boards on tested modules.</div>
   </div>
 </div>
 
