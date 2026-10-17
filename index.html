@@ -339,6 +339,41 @@ footer { text-align: center; color: var(--muted); font-size: 0.75rem; margin-top
     </div>
   </div>
   <div class="card">
+    <h2>Balancing (TBMM)</h2>
+    <p>The TBMM (Electric Avenue) supports automatic active balancing of modules outside the pack. Good candidate for Module 16 (confirmed 146 mV real imbalance).</p>
+    <div class="highlight">
+      <strong>How to balance with TBMM</strong> (from electric-avenue.us/tbmm and demo):
+      <ul>
+        <li>Connect TBMM to the module’s BMB connector with the included cable.</li>
+        <li>Power via USB-C (wall adapter, power bank, or phone).</li>
+        <li>Diagnose voltages first and confirm board health.</li>
+        <li>Use the Wi-Fi web interface to set the balance point (target voltage) and turn balancing on/off — easiest method.</li>
+        <li>Let it run; demo showed reduction from ~10–18 mV to ~2 mV over hours to ~24 h.</li>
+        <li>Monitor progress on the display or web interface. Retest imbalance after.</li>
+      </ul>
+    </div>
+    <p style="color:var(--muted);font-size:0.85rem;">Log balancing sessions and post-balance results here as they are done.</p>
+    <div style="overflow-x:auto">
+    <table>
+      <thead>
+        <tr>
+          <th>Module</th>
+          <th>Balanced?</th>
+          <th>Balance Point</th>
+          <th>Pre mV</th>
+          <th>Post mV</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>16</td><td class="pending">PENDING</td><td>—</td><td class="fail">146</td><td class="pending">—</td><td>Real imbalance confirmed; good candidate</td></tr>
+        <tr><td>12</td><td class="pending">—</td><td>—</td><td>4</td><td>—</td><td>Already PASS — no need</td></tr>
+        <tr><td>14</td><td class="pending">—</td><td>—</td><td>3–4</td><td>—</td><td>Already PASS — no need</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+  <div class="card">
     <h2>Pass Criteria</h2>
     <p>Cell group imbalance ≤ 6 mV = PASS. High ≤ 4.20 V, low ≥ 3.00 V.</p>
   </div>
@@ -425,7 +460,7 @@ footer { text-align: center; color: var(--muted); font-size: 0.75rem; margin-top
     <div class="timeline-item"><strong>July</strong> — Ervine’s diagnostic. GLEV remote: water / possible new pack.</div>
     <div class="timeline-item"><strong>Sept</strong> — Picked up; decided DIY pack drop.</div>
     <div class="timeline-item"><strong>Oct</strong> — Pack dropped (Vevor jack method), opened. Water in pyro fuse cavity confirmed. Module 12 TBMM: 4 mV PASS. Module 14 TBMM: 3–4 mV PASS. Module 16 TBMM: 146 mV FAIL (22.51–22.52 V, cells 3.681–3.827 V, 11.7 °C). Pyro fuse TPN 1053124-00-A logged.</div>
-    <div class="timeline-item"><strong>Next</strong> — TBMM priority modules 7, 6, 9. Address Module 16 imbalance and pyro fuse/cover. Inspect sensor leads and BMS boards on tested modules.</div>
+    <div class="timeline-item"><strong>Next</strong> — TBMM priority modules 7, 6, 9. Address Module 16 imbalance (consider TBMM balancing) and pyro fuse/cover. Inspect sensor leads and BMS boards on tested modules.</div>
   </div>
 </div>
 
