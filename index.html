@@ -288,7 +288,7 @@ footer { text-align: center; color: var(--muted); font-size: 0.75rem; margin-top
     <div class="highlight">
       <strong>Module 12:</strong> SMT 81 mV → TBMM 4 mV <span class="pass">PASS</span> (connector issue).<br>
       <strong>Module 14:</strong> 22.51 V • 3.749–3.753 V • 3–4 mV • 16.5–16.8 °C • <span class="pass">PASS</span>.<br>
-      <strong>Module 16:</strong> 22.51–22.52 V • cells 3.681–3.827 V (5:3.681 / 6:3.827) • imbalance <span class="fail">146 mV FAIL</span> • temps 11.7 °C. Variance stable (max 1 mV). Real cell-group imbalance confirmed.
+      <strong>Module 16:</strong> 22.51–22.52 V • cells 3.681–3.827 V (5:3.681 / 6:3.827) • imbalance <span class="fail">146 mV FAIL</span> • temps 11.7–12.5 °C. Variance stable. Real cell-group imbalance confirmed. Sensor leads: detached orange and green wires on bottom.
     </div>
   </div>
   <div class="card">
@@ -299,7 +299,7 @@ footer { text-align: center; color: var(--muted); font-size: 0.75rem; margin-top
       <tbody>
         <tr><td>12</td><td>81</td><td>4</td><td class="pass">PASS</td><td>Connector issue, not cells</td></tr>
         <tr><td>14</td><td>2</td><td>3–4</td><td class="pass">PASS</td><td>Healthy — matches low SMT</td></tr>
-        <tr><td>16</td><td>150</td><td class="fail">146</td><td class="fail">FAIL</td><td>Real imbalance confirmed</td></tr>
+        <tr><td>16</td><td>150</td><td class="fail">146</td><td class="fail">FAIL</td><td>Real imbalance — detached sense wires</td></tr>
         <tr><td>7</td><td class="flag-high">346</td><td class="pending">PENDING</td><td>—</td><td>Highest priority</td></tr>
         <tr><td>6</td><td class="flag-high">186</td><td class="pending">PENDING</td><td>—</td><td>High priority</td></tr>
         <tr><td>9</td><td class="flag-high">190</td><td class="pending">PENDING</td><td>—</td><td>High priority</td></tr>
@@ -327,7 +327,7 @@ footer { text-align: center; color: var(--muted); font-size: 0.75rem; margin-top
       <tbody>
         <tr><td>12</td><td class="pending">PENDING</td><td class="pending">—</td><td class="pending">PENDING</td><td class="pending">—</td></tr>
         <tr><td>14</td><td class="pending">PENDING</td><td class="pending">—</td><td class="pending">PENDING</td><td class="pending">—</td></tr>
-        <tr><td>16</td><td class="pending">PENDING</td><td class="pending">—</td><td class="pending">PENDING</td><td class="pending">—</td></tr>
+        <tr><td>16</td><td class="ok">Yes</td><td class="issue">Detached orange and green sense wires (bottom of module)</td><td class="pending">PENDING</td><td class="pending">—</td></tr>
         <tr><td>7</td><td class="pending">PENDING</td><td class="pending">—</td><td class="pending">PENDING</td><td class="pending">—</td></tr>
         <tr><td>6</td><td class="pending">PENDING</td><td class="pending">—</td><td class="pending">PENDING</td><td class="pending">—</td></tr>
         <tr><td>9</td><td class="pending">PENDING</td><td class="pending">—</td><td class="pending">PENDING</td><td class="pending">—</td></tr>
@@ -340,7 +340,7 @@ footer { text-align: center; color: var(--muted); font-size: 0.75rem; margin-top
   </div>
   <div class="card">
     <h2>Balancing (TBMM)</h2>
-    <p>The TBMM (Electric Avenue) supports automatic active balancing of modules outside the pack. Good candidate for Module 16 (confirmed 146 mV real imbalance).</p>
+    <p>The TBMM (Electric Avenue) supports automatic active balancing of modules outside the pack. Good candidate for Module 16 (confirmed 146 mV real imbalance) once sense wires are repaired.</p>
     <div class="highlight">
       <strong>How to balance with TBMM</strong> (from electric-avenue.us/tbmm and demo):
       <ul>
@@ -381,7 +381,7 @@ footer { text-align: center; color: var(--muted); font-size: 0.75rem; margin-top
         </tr>
       </thead>
       <tbody>
-        <tr><td>16</td><td class="pending">PENDING</td><td>—</td><td class="fail">146</td><td class="pending">—</td><td>Real imbalance confirmed; good candidate</td></tr>
+        <tr><td>16</td><td class="pending">PENDING</td><td>—</td><td class="fail">146</td><td class="pending">—</td><td>Real imbalance confirmed; repair sense wires first</td></tr>
         <tr><td>12</td><td class="pending">—</td><td>—</td><td>4</td><td>—</td><td>Already PASS — no need</td></tr>
         <tr><td>14</td><td class="pending">—</td><td>—</td><td>3–4</td><td>—</td><td>Already PASS — no need</td></tr>
       </tbody>
@@ -439,7 +439,7 @@ footer { text-align: center; color: var(--muted); font-size: 0.75rem; margin-top
       <li>Damaged or oxidized sense leads</li>
       <li>BMB board issues that affect voltage sensing (related to BMS_a129)</li>
     </ul>
-    <p>Module 14 showed the same pattern (low true imbalance on TBMM). Module 16 is the opposite: its 146 mV TBMM result confirmed a real cell-group imbalance.</p>
+    <p>Module 14 showed the same pattern (low true imbalance on TBMM). Module 16 is the opposite: its 146 mV TBMM result confirmed a real cell-group imbalance caused by detached sense wires.</p>
   </div>
 
   <div class="card">
@@ -474,8 +474,8 @@ footer { text-align: center; color: var(--muted); font-size: 0.75rem; margin-top
     <div class="timeline-item"><strong>June 20</strong> — Toolbox 3: cleared 18/22 codes, firmware 2025.20.6, brief L1 charge (+7 mi). f107 re-latched.</div>
     <div class="timeline-item"><strong>July</strong> — Ervine’s diagnostic. GLEV remote: water / possible new pack.</div>
     <div class="timeline-item"><strong>Sept</strong> — Picked up; decided DIY pack drop.</div>
-    <div class="timeline-item"><strong>Oct</strong> — Pack dropped (Vevor jack method), opened. Water in pyro fuse cavity confirmed. Module 12 TBMM: 4 mV PASS. Module 14 TBMM: 3–4 mV PASS. Module 16 TBMM: 146 mV FAIL (22.51–22.52 V, cells 3.681–3.827 V, 11.7 °C). Pyro fuse TPN 1053124-00-A logged.</div>
-    <div class="timeline-item"><strong>Next</strong> — TBMM priority modules 7, 6, 9. Address Module 16 imbalance (consider TBMM balancing) and pyro fuse/cover. Inspect sensor leads and BMS boards on tested modules.</div>
+    <div class="timeline-item"><strong>Oct</strong> — Pack dropped (Vevor jack method), opened. Water in pyro fuse cavity confirmed. Module 12 TBMM: 4 mV PASS. Module 14 TBMM: 3–4 mV PASS. Module 16 TBMM: 146 mV FAIL (22.51–22.52 V, cells 3.681–3.827 V). Pyro fuse TPN 1053124-00-A logged. Module 16 retested after removal — same 146 mV. Detached orange and green sense wires found on bottom of Module 16.</div>
+    <div class="timeline-item"><strong>Next</strong> — TBMM priority modules 7, 6, 9. Repair Module 16 sense wires then retest/balance. Inspect sensor leads and BMS boards on other tested modules. Address pyro fuse/cover.</div>
   </div>
 </div>
 
