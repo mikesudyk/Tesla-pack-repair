@@ -462,6 +462,39 @@ footer { text-align: center; color: var(--muted); font-size: 0.75rem; margin-top
     </ul>
     <p>The Physical Inspection table in the TBMM tab is ready to log those results as modules are opened.</p>
   </div>
+
+  <div class="card">
+    <h2>Sense Wire Repair Guide (Module 16)</h2>
+    <p>Module 16 has two detached sensor (voltage sense) wires causing measurement issues. The collector plates are aluminum, so the original ultrasonic welds can fail from corrosion or mechanical stress (common with water intrusion).</p>
+    <h3>Riveting vs Soldering / Welding</h3>
+    <p><strong>Riveting (recommended for DIY):</strong></p>
+    <ul>
+      <li><strong>Advantages:</strong> Strong mechanical connection, no heat near cells, low resistance when clean, uses basic tools, proven in the field for these modules.</li>
+      <li><strong>Disadvantages:</strong> Requires a small drilled hole (control shavings), careful wire routing to avoid pinching, potential galvanic corrosion (mitigate with antioxidant compound).</li>
+    </ul>
+    <p><strong>Soldering / Welding:</strong></p>
+    <ul>
+      <li>Soldering to aluminum is unreliable with normal tools (oxide layer + high thermal mass). Risk of heat damage to cells or plastic. Connection often not durable.</li>
+      <li>Ultrasonic or laser welding matches the factory method but requires specialized equipment not available for basic DIY.</li>
+    </ul>
+    <h3>How to Rivet a Sense Wire (Basic DIY)</h3>
+    <p><strong>Tools & materials:</strong> Hand pop-rivet tool, small aluminum pop rivets (3/32" typical), small ring terminals, thin copper wire (similar gauge), strippers/crimper, drill + bit, isopropyl alcohol, fine sandpaper, antioxidant compound (Noalox or Penetrox A), Kapton tape.</p>
+    <ol>
+      <li>Confirm the bad sense wires (tug-test and voltage/resistance check). On Module 16 these are the detached orange and green wires on the bottom.</li>
+      <li>Free or cut the bad wire near the failed attachment. Splice an extension if needed (butt connector + heat shrink).</li>
+      <li>Crimp a small ring terminal onto the wire end. Pull-test the crimp.</li>
+      <li>Choose a solid edge or overhang on the collector plate for that brick. Clean thoroughly with isopropyl and lightly scuff the aluminum contact area.</li>
+      <li>Drill a hole sized for the rivet. Capture all metal shavings.</li>
+      <li>Apply a thin layer of antioxidant compound to the ring terminal face and cleaned aluminum.</li>
+      <li>Set the aluminum pop rivet so the terminal sits flat and tight.</li>
+      <li>Route the wire neatly with a gentle service loop. Secure with Kapton tape so it cannot vibrate or get pinched.</li>
+      <li>Verify with multimeter or TBMM: low resistance and consistent brick voltages.</li>
+    </ol>
+    <p>After repair, retest Module 16 with TBMM and consider balancing if the true imbalance remains. Document photos and results in the Physical Inspection and Balancing tables.</p>
+    <div class="highlight">
+      <strong>Safety:</strong> Modules hold significant energy even when removed. Isolate the module under repair, wear eye protection when drilling, and keep metal debris out of the cells.
+    </div>
+  </div>
 </div>
 
 <!-- TIMELINE -->
