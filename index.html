@@ -298,7 +298,7 @@ footer { text-align: center; color: var(--muted); font-size: 0.75rem; margin-top
     <div class="highlight">
       <strong>Module 12:</strong> SMT 81 mV → TBMM 4 mV <span class="pass">PASS</span> (connector issue). Out-of-pack retest: 22.51 V • cells 3.749–3.753 V • 4 mV imbalance • 13.7–13.8 °C • thumbs-up. Variance over 1.9 min (49 readings): Hi=23 mV (M1 C4), 2 cells >5 mV. Physical: looks good; sensor wires good except bottom orange needs rivet; white marks on connector plate bottom.<br>
       <strong>Module 14:</strong> 22.51 V • 3.749–3.753 V • 3–4 mV • 16.5–16.8 °C • <span class="pass">PASS</span>.<br>
-      <strong>Module 15:</strong> 22.50 V • cell groups 3.747–3.751 V • imbalance 3–4 mV • temps 13.5–13.7 °C • variance max 1 mV • <span class="pass">PASS</span>. Top sensor wires (red, yellow, blue, black) all good.<br>
+      <strong>Module 15:</strong> 22.50 V • cell groups 3.747–3.751 V • imbalance 3–4 mV • temps 13.5–13.7 °C • variance max 1 mV • <span class="pass">PASS</span>. All sensor wires good (top: red/yellow/blue/black; bottom: orange/green/brown).<br>
       <strong>Module 16:</strong> 22.51–22.52 V • cells 3.681–3.827 V (5:3.681 / 6:3.827) • imbalance <span class="fail">146 mV FAIL</span> • temps 11.7–12.5 °C. Variance stable. Real cell-group imbalance confirmed. Sensor leads: detached orange and green wires on bottom.
     </div>
   </div>
@@ -339,7 +339,7 @@ footer { text-align: center; color: var(--muted); font-size: 0.75rem; margin-top
       <tbody>
         <tr><td>12</td><td class="ok">Yes</td><td class="issue">Bottom orange sensor wire needs rivet; white marks observed on connector plate bottom. Other sensor wires good.</td><td class="pending">PENDING</td><td class="pending">—</td></tr>
         <tr><td>14</td><td class="pending">PENDING</td><td class="pending">—</td><td class="pending">PENDING</td><td class="pending">—</td></tr>
-        <tr><td>15</td><td class="ok">Yes (top)</td><td class="ok">Top sensor wires (red, yellow, blue, black) all good.</td><td class="pending">PENDING</td><td class="pending">—</td></tr>
+        <tr><td>15</td><td class="ok">Yes</td><td class="ok">All sensor wires good: top (red, yellow, blue, black) and bottom (orange, green, brown).</td><td class="pending">PENDING</td><td class="pending">—</td></tr>
         <tr><td>16</td><td class="ok">Yes</td><td class="issue">Detached orange and green sense wires (bottom of module)</td><td class="pending">PENDING</td><td class="pending">—</td></tr>
         <tr><td>7</td><td class="pending">PENDING</td><td class="pending">—</td><td class="pending">PENDING</td><td class="pending">—</td></tr>
         <tr><td>6</td><td class="pending">PENDING</td><td class="pending">—</td><td class="pending">PENDING</td><td class="pending">—</td></tr>
@@ -521,7 +521,7 @@ footer { text-align: center; color: var(--muted); font-size: 0.75rem; margin-top
     <div class="timeline-item"><strong>June 20</strong> — Toolbox 3: cleared 18/22 codes, firmware 2025.20.6, brief L1 charge (+7 mi). f107 re-latched.</div>
     <div class="timeline-item"><strong>July</strong> — Ervine’s diagnostic. GLEV remote: water / possible new pack.</div>
     <div class="timeline-item"><strong>Sept</strong> — Picked up; decided DIY pack drop.</div>
-    <div class="timeline-item"><strong>Oct</strong> — Pack dropped (Vevor jack method), opened. Water in pyro fuse cavity confirmed. Module 12 TBMM: 4 mV PASS (in-pack). Module 14 TBMM: 3–4 mV PASS. Module 15 TBMM: 3–4 mV PASS (22.50 V, cells 3.747–3.751 V, 13.5–13.7 °C). Module 16 TBMM: 146 mV FAIL (22.51–22.52 V, cells 3.681–3.827 V). Pyro fuse TPN 1053124-00-A logged. Module 16 retested after removal — same 146 mV. Detached orange and green sense wires found on bottom of Module 16. Module 12 physical inspection: looks good overall, sensor wires good except bottom orange needs rivet; white marks on connector plate bottom. Module 12 out-of-pack TBMM retest: 22.51 V, cells 3.749–3.753 V, 4 mV, 13.7–13.8 °C (PASS); variance Hi=23 mV over ~2 min. Module 15 physical: top sensor wires (red, yellow, blue, black) all good.</div>
+    <div class="timeline-item"><strong>Oct</strong> — Pack dropped (Vevor jack method), opened. Water in pyro fuse cavity confirmed. Module 12 TBMM: 4 mV PASS (in-pack). Module 14 TBMM: 3–4 mV PASS. Module 15 TBMM: 3–4 mV PASS (22.50 V, cells 3.747–3.751 V, 13.5–13.7 °C). Module 16 TBMM: 146 mV FAIL (22.51–22.52 V, cells 3.681–3.827 V). Pyro fuse TPN 1053124-00-A logged. Module 16 retested after removal — same 146 mV. Detached orange and green sense wires found on bottom of Module 16. Module 12 physical inspection: looks good overall, sensor wires good except bottom orange needs rivet; white marks on connector plate bottom. Module 12 out-of-pack TBMM retest: 22.51 V, cells 3.749–3.753 V, 4 mV, 13.7–13.8 °C (PASS); variance Hi=23 mV over ~2 min. Module 15 physical: all sensor wires good (top red/yellow/blue/black; bottom orange/green/brown).</div>
     <div class="timeline-item"><strong>Next</strong> — TBMM priority modules 7, 6, 9. Repair Module 12 bottom orange sensor wire (rivet). Repair Module 16 sense wires then retest/balance. Inspect sensor leads and BMS boards on other tested modules. Address pyro fuse/cover.</div>
   </div>
 </div>
