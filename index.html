@@ -159,7 +159,43 @@ th { background: #21262d; }
 }
 .module-cell.flat { border-bottom: 3px solid var(--green); }
 .module-cell.low { border-bottom: 3px solid var(--orange); }
-.module-cell.high { border-bottom: 3px solid var(--red); }
+.wire-box {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  border-radius: 2px;
+  margin: 0 1px 0 3px;
+  vertical-align: middle;
+  border: 1px solid rgba(255,255,255,0.15);
+}
+.wire-red { background: #f85149; }
+.wire-yellow { background: #e3b341; }
+.wire-blue { background: #58a6ff; }
+.wire-black { background: #484f58; }
+.wire-orange { background: #db6d28; }
+.wire-green { background: #3fb950; }
+.wire-brown { background: #a3712e; }
+.wire-status {
+  font-size: 0.7rem;
+  font-weight: 600;
+  margin-right: 4px;
+  vertical-align: middle;
+}
+.wire-cell {
+  white-space: nowrap;
+  font-size: 0.75rem;
+  line-height: 1.4;
+}
+.bms-box {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  border-radius: 2px;
+  background: #8b949e;
+  margin-right: 4px;
+  vertical-align: middle;
+  border: 1px solid rgba(255,255,255,0.15);
+}
 .pages-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -324,32 +360,162 @@ footer { text-align: center; color: var(--muted); font-size: 0.75rem; margin-top
   </div>
   <div class="card">
     <h2>Physical Inspection (Sensor Leads & BMS Board)</h2>
-    <p style="color:var(--muted);font-size:0.85rem;margin-top:-4px;">Confirmation of visual/physical inspection for sensor leads and the BMS circuit board on each module. Update as modules are opened or inspected.</p>
+    <p style="color:var(--muted);font-size:0.85rem;margin-top:-4px;">Colored boxes = wire color. P = good, F = issue/needs repair, — = not yet checked. Notes in the right column.</p>
     <div style="overflow-x:auto">
     <table>
       <thead>
         <tr>
           <th>Module</th>
-          <th>Sensor Leads Inspected</th>
-          <th>Sensor Leads Issues</th>
-          <th>BMS Board Inspected</th>
-          <th>BMS Board Issues</th>
+          <th>Sensor Wires</th>
+          <th>BMS Board</th>
+          <th>Notes</th>
         </tr>
       </thead>
       <tbody>
-        <tr><td>12</td><td class="ok">Yes</td><td class="issue">Bottom orange sensor wire needs rivet; white marks observed on connector plate bottom. Other sensor wires good.</td><td class="pending">PENDING</td><td class="pending">—</td></tr>
-        <tr><td>14</td><td class="pending">PENDING</td><td class="pending">—</td><td class="pending">PENDING</td><td class="pending">—</td></tr>
-        <tr><td>15</td><td class="ok">Yes</td><td class="ok">All sensor wires good: top (red, yellow, blue, black) and bottom (orange, green, brown).</td><td class="pending">PENDING</td><td class="pending">—</td></tr>
-        <tr><td>16</td><td class="ok">Yes</td><td class="issue">Detached orange and green sense wires (bottom of module)</td><td class="pending">PENDING</td><td class="pending">—</td></tr>
-        <tr><td>7</td><td class="pending">PENDING</td><td class="pending">—</td><td class="pending">PENDING</td><td class="pending">—</td></tr>
-        <tr><td>6</td><td class="pending">PENDING</td><td class="pending">—</td><td class="pending">PENDING</td><td class="pending">—</td></tr>
-        <tr><td>9</td><td class="pending">PENDING</td><td class="pending">—</td><td class="pending">PENDING</td><td class="pending">—</td></tr>
-        <tr><td>10</td><td class="pending">PENDING</td><td class="pending">—</td><td class="pending">PENDING</td><td class="pending">—</td></tr>
-        <tr><td>11</td><td class="pending">PENDING</td><td class="pending">—</td><td class="pending">PENDING</td><td class="pending">—</td></tr>
-        <tr><td>1–5, 8, 13</td><td class="pending">PENDING</td><td class="pending">—</td><td class="pending">PENDING</td><td class="pending">—</td></tr>
+        <tr>
+          <td>12</td>
+          <td class="wire-cell">
+            <span class="wire-box wire-red" title="Red (top)"></span><span class="wire-status pass">P</span>
+            <span class="wire-box wire-yellow" title="Yellow (top)"></span><span class="wire-status pass">P</span>
+            <span class="wire-box wire-blue" title="Blue (top)"></span><span class="wire-status pass">P</span>
+            <span class="wire-box wire-black" title="Black (top)"></span><span class="wire-status pass">P</span>
+            <span class="wire-box wire-orange" title="Orange (bottom)"></span><span class="wire-status fail">F</span>
+            <span class="wire-box wire-green" title="Green (bottom)"></span><span class="wire-status pass">P</span>
+            <span class="wire-box wire-brown" title="Brown (bottom)"></span><span class="wire-status pass">P</span>
+          </td>
+          <td class="wire-cell"><span class="bms-box"></span><span class="wire-status pending">—</span></td>
+          <td>Bottom orange needs rivet. White marks on connector plate bottom. Other wires good.</td>
+        </tr>
+        <tr>
+          <td>14</td>
+          <td class="wire-cell">
+            <span class="wire-box wire-red"></span><span class="wire-status pending">—</span>
+            <span class="wire-box wire-yellow"></span><span class="wire-status pending">—</span>
+            <span class="wire-box wire-blue"></span><span class="wire-status pending">—</span>
+            <span class="wire-box wire-black"></span><span class="wire-status pending">—</span>
+            <span class="wire-box wire-orange"></span><span class="wire-status pending">—</span>
+            <span class="wire-box wire-green"></span><span class="wire-status pending">—</span>
+            <span class="wire-box wire-brown"></span><span class="wire-status pending">—</span>
+          </td>
+          <td class="wire-cell"><span class="bms-box"></span><span class="wire-status pending">—</span></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>15</td>
+          <td class="wire-cell">
+            <span class="wire-box wire-red"></span><span class="wire-status pass">P</span>
+            <span class="wire-box wire-yellow"></span><span class="wire-status pass">P</span>
+            <span class="wire-box wire-blue"></span><span class="wire-status pass">P</span>
+            <span class="wire-box wire-black"></span><span class="wire-status pass">P</span>
+            <span class="wire-box wire-orange"></span><span class="wire-status pass">P</span>
+            <span class="wire-box wire-green"></span><span class="wire-status pass">P</span>
+            <span class="wire-box wire-brown"></span><span class="wire-status pass">P</span>
+          </td>
+          <td class="wire-cell"><span class="bms-box"></span><span class="wire-status pending">—</span></td>
+          <td>All sensor wires good (top red/yellow/blue/black; bottom orange/green/brown).</td>
+        </tr>
+        <tr>
+          <td>16</td>
+          <td class="wire-cell">
+            <span class="wire-box wire-red"></span><span class="wire-status pending">—</span>
+            <span class="wire-box wire-yellow"></span><span class="wire-status pending">—</span>
+            <span class="wire-box wire-blue"></span><span class="wire-status pending">—</span>
+            <span class="wire-box wire-black"></span><span class="wire-status pending">—</span>
+            <span class="wire-box wire-orange"></span><span class="wire-status fail">F</span>
+            <span class="wire-box wire-green"></span><span class="wire-status fail">F</span>
+            <span class="wire-box wire-brown"></span><span class="wire-status pending">—</span>
+          </td>
+          <td class="wire-cell"><span class="bms-box"></span><span class="wire-status pending">—</span></td>
+          <td>Detached orange and green sense wires (bottom). Real imbalance confirmed.</td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td class="wire-cell">
+            <span class="wire-box wire-red"></span><span class="wire-status pending">—</span>
+            <span class="wire-box wire-yellow"></span><span class="wire-status pending">—</span>
+            <span class="wire-box wire-blue"></span><span class="wire-status pending">—</span>
+            <span class="wire-box wire-black"></span><span class="wire-status pending">—</span>
+            <span class="wire-box wire-orange"></span><span class="wire-status pending">—</span>
+            <span class="wire-box wire-green"></span><span class="wire-status pending">—</span>
+            <span class="wire-box wire-brown"></span><span class="wire-status pending">—</span>
+          </td>
+          <td class="wire-cell"><span class="bms-box"></span><span class="wire-status pending">—</span></td>
+          <td>Highest priority (SMT 346 mV)</td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td class="wire-cell">
+            <span class="wire-box wire-red"></span><span class="wire-status pending">—</span>
+            <span class="wire-box wire-yellow"></span><span class="wire-status pending">—</span>
+            <span class="wire-box wire-blue"></span><span class="wire-status pending">—</span>
+            <span class="wire-box wire-black"></span><span class="wire-status pending">—</span>
+            <span class="wire-box wire-orange"></span><span class="wire-status pending">—</span>
+            <span class="wire-box wire-green"></span><span class="wire-status pending">—</span>
+            <span class="wire-box wire-brown"></span><span class="wire-status pending">—</span>
+          </td>
+          <td class="wire-cell"><span class="bms-box"></span><span class="wire-status pending">—</span></td>
+          <td>High priority (SMT 186 mV)</td>
+        </tr>
+        <tr>
+          <td>9</td>
+          <td class="wire-cell">
+            <span class="wire-box wire-red"></span><span class="wire-status pending">—</span>
+            <span class="wire-box wire-yellow"></span><span class="wire-status pending">—</span>
+            <span class="wire-box wire-blue"></span><span class="wire-status pending">—</span>
+            <span class="wire-box wire-black"></span><span class="wire-status pending">—</span>
+            <span class="wire-box wire-orange"></span><span class="wire-status pending">—</span>
+            <span class="wire-box wire-green"></span><span class="wire-status pending">—</span>
+            <span class="wire-box wire-brown"></span><span class="wire-status pending">—</span>
+          </td>
+          <td class="wire-cell"><span class="bms-box"></span><span class="wire-status pending">—</span></td>
+          <td>High priority (SMT 190 mV)</td>
+        </tr>
+        <tr>
+          <td>10</td>
+          <td class="wire-cell">
+            <span class="wire-box wire-red"></span><span class="wire-status pending">—</span>
+            <span class="wire-box wire-yellow"></span><span class="wire-status pending">—</span>
+            <span class="wire-box wire-blue"></span><span class="wire-status pending">—</span>
+            <span class="wire-box wire-black"></span><span class="wire-status pending">—</span>
+            <span class="wire-box wire-orange"></span><span class="wire-status pending">—</span>
+            <span class="wire-box wire-green"></span><span class="wire-status pending">—</span>
+            <span class="wire-box wire-brown"></span><span class="wire-status pending">—</span>
+          </td>
+          <td class="wire-cell"><span class="bms-box"></span><span class="wire-status pending">—</span></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>11</td>
+          <td class="wire-cell">
+            <span class="wire-box wire-red"></span><span class="wire-status pending">—</span>
+            <span class="wire-box wire-yellow"></span><span class="wire-status pending">—</span>
+            <span class="wire-box wire-blue"></span><span class="wire-status pending">—</span>
+            <span class="wire-box wire-black"></span><span class="wire-status pending">—</span>
+            <span class="wire-box wire-orange"></span><span class="wire-status pending">—</span>
+            <span class="wire-box wire-green"></span><span class="wire-status pending">—</span>
+            <span class="wire-box wire-brown"></span><span class="wire-status pending">—</span>
+          </td>
+          <td class="wire-cell"><span class="bms-box"></span><span class="wire-status pending">—</span></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>1–5, 8, 13</td>
+          <td class="wire-cell">
+            <span class="wire-box wire-red"></span><span class="wire-status pending">—</span>
+            <span class="wire-box wire-yellow"></span><span class="wire-status pending">—</span>
+            <span class="wire-box wire-blue"></span><span class="wire-status pending">—</span>
+            <span class="wire-box wire-black"></span><span class="wire-status pending">—</span>
+            <span class="wire-box wire-orange"></span><span class="wire-status pending">—</span>
+            <span class="wire-box wire-green"></span><span class="wire-status pending">—</span>
+            <span class="wire-box wire-brown"></span><span class="wire-status pending">—</span>
+          </td>
+          <td class="wire-cell"><span class="bms-box"></span><span class="wire-status pending">—</span></td>
+          <td>Expected PASS (low SMT spreads)</td>
+        </tr>
       </tbody>
     </table>
     </div>
+    <p style="font-size:0.75rem;color:var(--muted);margin-top:6px;">Wire order: Red Yellow Blue Black (top) · Orange Green Brown (bottom). Hover boxes for labels on desktop.</p>
   </div>
   <div class="card">
     <h2>Balancing (TBMM)</h2>
