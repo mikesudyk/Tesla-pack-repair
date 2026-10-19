@@ -114,7 +114,7 @@ th { background: #21262d; }
 .progress-bar {
   background: var(--green);
   height: 100%;
-  width: 18.75%;
+  width: 25%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -225,18 +225,18 @@ footer { text-align: center; color: var(--muted); font-size: 0.75rem; margin-top
   <div class="card">
     <h2>Quick Stats</h2>
     <div class="stats">
-      <div class="stat"><div class="value">3/16</div><div class="label">Modules Tested</div></div>
+      <div class="stat"><div class="value">4/16</div><div class="label">Modules Tested</div></div>
       <div class="stat"><div class="value">4</div><div class="label">Active Faults</div></div>
       <div class="stat"><div class="value">346 mV</div><div class="label">Max SMT Spread</div></div>
     </div>
   </div>
   <div class="card">
     <h2>Current Status</h2>
-    <p>Pack dropped and opened in garage. Water confirmed in pyro fuse cavity. Modules 12 & 14 TBMM <strong>PASS</strong> (3–4 mV). Module 16 <strong>FAIL</strong> at 146 mV true imbalance (cells 3.681–3.827 V). Mixed results so far — some connector issues, at least one real cell-group problem.</p>
+    <p>Pack dropped and opened in garage. Water confirmed in pyro fuse cavity. Modules 12, 14 & 15 TBMM <strong>PASS</strong> (3–4 mV). Module 16 <strong>FAIL</strong> at 146 mV true imbalance (cells 3.681–3.827 V). Mixed results so far — some connector issues, at least one real cell-group problem.</p>
     <div class="highlight">
       <strong>Priority next:</strong> TBMM Modules 7 (346 mV SMT), 6 (186 mV), and 9 (190 mV). Pyro fuse identified: TPN 1053124-00-A / TSN T15E0022094.
     </div>
-    <div class="progress"><div class="progress-bar">3/16</div></div>
+    <div class="progress"><div class="progress-bar">4/16</div></div>
   </div>
   <div class="card">
     <h2>Vehicle</h2>
@@ -282,11 +282,12 @@ footer { text-align: center; color: var(--muted); font-size: 0.75rem; margin-top
 <!-- TBMM -->
 <div id="tbmm" class="section">
   <div class="card">
-    <h2>TBMM Progress — 3 of 16</h2>
-    <div class="progress"><div class="progress-bar">3/16</div></div>
+    <h2>TBMM Progress — 4 of 16</h2>
+    <div class="progress"><div class="progress-bar">4/16</div></div>
     <div class="highlight">
       <strong>Module 12:</strong> SMT 81 mV → TBMM 4 mV <span class="pass">PASS</span> (connector issue).<br>
       <strong>Module 14:</strong> 22.51 V • 3.749–3.753 V • 3–4 mV • 16.5–16.8 °C • <span class="pass">PASS</span>.<br>
+      <strong>Module 15:</strong> 22.50 V • cell groups 3.747–3.751 V • imbalance 3–4 mV • temps 13.5–13.7 °C • variance max 1 mV • <span class="pass">PASS</span>.<br>
       <strong>Module 16:</strong> 22.51–22.52 V • cells 3.681–3.827 V (5:3.681 / 6:3.827) • imbalance <span class="fail">146 mV FAIL</span> • temps 11.7–12.5 °C. Variance stable. Real cell-group imbalance confirmed. Sensor leads: detached orange and green wires on bottom.
     </div>
   </div>
@@ -298,13 +299,14 @@ footer { text-align: center; color: var(--muted); font-size: 0.75rem; margin-top
       <tbody>
         <tr><td>12</td><td>81</td><td>4</td><td class="pass">PASS</td><td>Connector issue, not cells</td></tr>
         <tr><td>14</td><td>2</td><td>3–4</td><td class="pass">PASS</td><td>Healthy — matches low SMT</td></tr>
+        <tr><td>15</td><td>1</td><td>3–4</td><td class="pass">PASS</td><td>Healthy — matches low SMT</td></tr>
         <tr><td>16</td><td>150</td><td class="fail">146</td><td class="fail">FAIL</td><td>Real imbalance — detached sense wires</td></tr>
         <tr><td>7</td><td class="flag-high">346</td><td class="pending">PENDING</td><td>—</td><td>Highest priority</td></tr>
         <tr><td>6</td><td class="flag-high">186</td><td class="pending">PENDING</td><td>—</td><td>High priority</td></tr>
         <tr><td>9</td><td class="flag-high">190</td><td class="pending">PENDING</td><td>—</td><td>High priority</td></tr>
         <tr><td>10</td><td>150</td><td class="pending">PENDING</td><td>—</td><td>Medium</td></tr>
         <tr><td>11</td><td>150</td><td class="pending">PENDING</td><td>—</td><td>Medium</td></tr>
-        <tr><td>1–5,8,13,15</td><td>1–3</td><td class="pending">PENDING</td><td>—</td><td>Expected PASS</td></tr>
+        <tr><td>1–5,8,13</td><td>1–3</td><td class="pending">PENDING</td><td>—</td><td>Expected PASS</td></tr>
       </tbody>
     </table>
     </div>
@@ -332,7 +334,7 @@ footer { text-align: center; color: var(--muted); font-size: 0.75rem; margin-top
         <tr><td>9</td><td class="pending">PENDING</td><td class="pending">—</td><td class="pending">PENDING</td><td class="pending">—</td></tr>
         <tr><td>10</td><td class="pending">PENDING</td><td class="pending">—</td><td class="pending">PENDING</td><td class="pending">—</td></tr>
         <tr><td>11</td><td class="pending">PENDING</td><td class="pending">—</td><td class="pending">PENDING</td><td class="pending">—</td></tr>
-        <tr><td>1–5, 8, 13, 15</td><td class="pending">PENDING</td><td class="pending">—</td><td class="pending">PENDING</td><td class="pending">—</td></tr>
+        <tr><td>1–5, 8, 13</td><td class="pending">PENDING</td><td class="pending">—</td><td class="pending">PENDING</td><td class="pending">—</td></tr>
       </tbody>
     </table>
     </div>
@@ -381,6 +383,7 @@ footer { text-align: center; color: var(--muted); font-size: 0.75rem; margin-top
       </thead>
       <tbody>
         <tr><td>16</td><td class="pending">PENDING</td><td>—</td><td class="fail">146</td><td class="pending">—</td><td>Real imbalance confirmed; repair sense wires first</td></tr>
+        <tr><td>15</td><td class="pending">—</td><td>—</td><td>3–4</td><td>—</td><td>Already PASS — no need</td></tr>
         <tr><td>12</td><td class="pending">—</td><td>—</td><td>4</td><td>—</td><td>Already PASS — no need</td></tr>
         <tr><td>14</td><td class="pending">—</td><td>—</td><td>3–4</td><td>—</td><td>Already PASS — no need</td></tr>
       </tbody>
@@ -506,7 +509,7 @@ footer { text-align: center; color: var(--muted); font-size: 0.75rem; margin-top
     <div class="timeline-item"><strong>June 20</strong> — Toolbox 3: cleared 18/22 codes, firmware 2025.20.6, brief L1 charge (+7 mi). f107 re-latched.</div>
     <div class="timeline-item"><strong>July</strong> — Ervine’s diagnostic. GLEV remote: water / possible new pack.</div>
     <div class="timeline-item"><strong>Sept</strong> — Picked up; decided DIY pack drop.</div>
-    <div class="timeline-item"><strong>Oct</strong> — Pack dropped (Vevor jack method), opened. Water in pyro fuse cavity confirmed. Module 12 TBMM: 4 mV PASS. Module 14 TBMM: 3–4 mV PASS. Module 16 TBMM: 146 mV FAIL (22.51–22.52 V, cells 3.681–3.827 V). Pyro fuse TPN 1053124-00-A logged. Module 16 retested after removal — same 146 mV. Detached orange and green sense wires found on bottom of Module 16.</div>
+    <div class="timeline-item"><strong>Oct</strong> — Pack dropped (Vevor jack method), opened. Water in pyro fuse cavity confirmed. Module 12 TBMM: 4 mV PASS. Module 14 TBMM: 3–4 mV PASS. Module 15 TBMM: 3–4 mV PASS (22.50 V, cells 3.747–3.751 V, 13.5–13.7 °C). Module 16 TBMM: 146 mV FAIL (22.51–22.52 V, cells 3.681–3.827 V). Pyro fuse TPN 1053124-00-A logged. Module 16 retested after removal — same 146 mV. Detached orange and green sense wires found on bottom of Module 16.</div>
     <div class="timeline-item"><strong>Next</strong> — TBMM priority modules 7, 6, 9. Repair Module 16 sense wires then retest/balance. Inspect sensor leads and BMS boards on other tested modules. Address pyro fuse/cover.</div>
   </div>
 </div>
@@ -548,7 +551,7 @@ footer { text-align: center; color: var(--muted); font-size: 0.75rem; margin-top
 
 <footer>
   Central data log for 2015 Model S 85D (5YJSA1H25FF091116) pack repair • Mike Sudyk<br>
-  Data from SMT June 2026, Toolbox, TBMM Oct 2026 (Modules 12, 14 & 16), physical inspection. Ready for 85Dlog.5udyk.com
+  Data from SMT June 2026, Toolbox, TBMM Oct 2026 (Modules 12, 14, 15 & 16), physical inspection. Ready for 85Dlog.5udyk.com
 </footer>
 
 <script>
