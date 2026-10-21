@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EV School — 2015 Model S 85D Pack Repair</title>
+<style>
+:root {
+  --bg: #0d1117;
+  --card: #161b22;
+  --border: #30363d;
+  --text: #e6edf3;
+  --muted: #8b949e;
+  --green: #3fb950;
+  --yellow: #d29922;
+  --red: #f85149;
+  --orange: #db6d28;
+  --blue: #58a6ff;
+  --accent: #1f6feb;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  padding: 12px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+header {
+  text-align: center;
+  padding: 16px 8px 8px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 16px;
+}
+h1 { font-size: 1.5rem; margin: 0 0 4px; }
+.subtitle { color: var(--muted); font-size: 0.9rem; }
+a.back { color: var(--blue); text-decoration: none; font-size: 0.9rem; }
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+h2 { font-size: 1.2rem; margin: 0 0 12px; border-bottom: 1px solid var(--border); padding-bottom: 6px; color: var(--blue); }
+h3 { font-size: 1.05rem; margin: 14px 0 8px; }
+.simple { background: #1a2332; border-left: 4px solid var(--green); padding: 10px; border-radius: 4px; margin: 10px 0; }
+.full { background: #1c2128; border-left: 4px solid var(--blue); padding: 10px; border-radius: 4px; margin: 10px 0; }
+.garage { background: #2d1f0e; border-left: 4px solid var(--orange); padding: 10px; border-radius: 4px; margin: 10px 0; }
+.check { background: #21262d; padding: 10px; border-radius: 4px; margin: 10px 0; }
+img.diagram { max-width: 100%; height: auto; border-radius: 6px; margin: 10px 0; border: 1px solid var(--border); }
+footer { text-align: center; color: var(--muted); font-size: 0.75rem; margin-top: 24px; padding-top: 12px; border-top: 1px solid var(--border); }
+ul { margin: 8px 0; padding-left: 18px; }
+li { margin-bottom: 6px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>EV School</h1>
+  <div class="subtitle">Teaching kids (ages 5–15) about batteries and the 2015 Model S 85D pack repair</div>
+  <p><a class="back" href="index.html">← Back to Repair Log</a></p>
+</header>
+
+<div class="card">
+  <h2>About These Lessons</h2>
+  <p>Progressive lessons starting with how a battery works, then series/parallel wiring, then how the Tesla modules and pack are built. Content is layered for younger and older kids. Garage activities are noted for later when we can look at the real pack.</p>
+  <p>Tied to this specific pack: 16 modules, ~7,100 cells, modules ~22.5 V, SMT/TBMM results (Modules 12/14/15 PASS, 16 FAIL, water in pyro fuse area).</p>
+</div>
+
+<!-- LESSON 1 -->
+<div class="card">
+  <h2>Lesson 1 — What a Battery Is and How It Makes Electricity</h2>
+
+  <div class="simple">
+    <h3>Simple version (ages 5–8)</h3>
+    <p>A battery is a special box that stores energy and lets it out as electricity. Inside it are two different materials (one “negative,” one “positive”) and a liquid (or gel) that lets tiny charged pieces called lithium ions move around. When you use the battery, the ions move one way and the electricity flows out through the wires to light a bulb or spin a motor. When you charge it, the ions move back the other way so the battery is ready again. It’s like a bucket of energy you can fill up and then empty.</p>
+  </div>
+
+  <div class="full">
+    <h3>Fuller version (ages 9–15)</h3>
+    <p>A lithium-ion cell (the kind in the Tesla and in phones) converts chemical energy into electrical energy.</p>
+    <ul>
+      <li><strong>Anode</strong> (negative side, usually graphite)</li>
+      <li><strong>Cathode</strong> (positive side, metal oxide)</li>
+      <li><strong>Electrolyte</strong> that lets lithium ions (Li⁺) move</li>
+      <li><strong>Separator</strong> that lets ions through but blocks electrons</li>
+    </ul>
+    <p>During <strong>discharge</strong> (using the battery): lithium ions move from the anode through the electrolyte to the cathode. Electrons are forced to travel through the external circuit (the wires and the light bulb or motor) and do work.</p>
+    <p>During <strong>charge</strong>: the process reverses.</p>
+    <p>One single 18650 cell in the Tesla is about 3.6–3.7 V nominal and holds a few amp-hours. The whole pack uses thousands of them.</p>
+  </div>
+
+  <p><em>Diagram: Lithium-ion cell cross-section during discharge — ions move inside, electrons flow outside to power a light.</em></p>
+
+  <div class="garage">
+    <h3>Garage later</h3>
+    <p>Show one real 18650 cell (or a dead AA) next to the diagram. Point at the positive and negative ends. Optional: measure a single cell voltage with a multimeter (~3.7 V when partially charged).</p>
+  </div>
+
+  <div class="check">
+    <h3>Quick check</h3>
+    <ul>
+      <li>Younger: “Which way do the ions move when the light is on?”</li>
+      <li>Older: “What happens to the electrons while the ions are moving inside?”</li>
+    </ul>
+  </div>
+</div>
+
+<!-- LESSON 2 -->
+<div class="card">
+  <h2>Lesson 2 — Wiring Cells: Series and Parallel</h2>
+
+  <div class="simple">
+    <h3>Simple version (ages 5–8)</h3>
+    <p>Batteries can be connected two main ways:</p>
+    <ul>
+      <li><strong>Series</strong> (end to end): voltages add up so you get stronger electricity (brighter light, more “push”).</li>
+      <li><strong>Parallel</strong> (side by side): you get more energy that lasts longer, but the voltage stays the same.</li>
+    </ul>
+    <p>The Tesla uses both so the car has high voltage <em>and</em> lots of range.</p>
+  </div>
+
+  <div class="full">
+    <h3>Fuller version (ages 9–15)</h3>
+    <ul>
+      <li><strong>Parallel</strong>: cells share the same voltage; capacities add. A “brick” or cell group in a Tesla module is dozens of 18650 cells in parallel. This gives high amp-hour capacity while the voltage stays ~3.7 V.</li>
+      <li><strong>Series</strong>: voltages add. Inside each module, 6 of those parallel bricks are connected in series → module voltage ≈ 6 × 3.75 V ≈ 22.5 V.</li>
+      <li>The full pack puts 16 modules in series → pack voltage around 360 V (exactly what the SMT data shows).</li>
+    </ul>
+    <p>That’s why the pack is described as roughly 96s (series groups) × 74p (parallel cells per group).</p>
+  </div>
+
+  <p><em>Diagrams: Series vs Parallel with everyday batteries; how one Tesla module is built from parallel groups into 6 series bricks (~22.5 V).</em></p>
+
+  <div class="garage">
+    <h3>Garage later</h3>
+    <ul>
+      <li>Measure one module with the TBMM (you’ve already seen ~22.5 V on the good ones).</li>
+      <li>Point out the six cell groups (the “bricks”) on the SMT screen or TBMM.</li>
+      <li>Show how the sense wires connect to each group so the computer can watch every series step.</li>
+      <li>Younger kids can count the modules still in the pack; older kids can calculate 6 × 16 = 96 series groups.</li>
+    </ul>
+  </div>
+
+  <div class="check">
+    <h3>Quick check</h3>
+    <ul>
+      <li>Younger: “If I put two batteries end-to-end, do I get more power or does it last longer?”</li>
+      <li>Older: “Why does the Tesla put many cells in parallel inside each brick, then put the bricks in series?”</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card">
+  <h2>Coming Next</h2>
+  <p>Lesson 3: From Cells to Modules to the Pack (layout, cooling, pyro fuse, water intrusion on this car).</p>
+  <p>More lessons and visuals will be added via GitHub pushes. Images of diagrams and real modules can be committed to the repo and linked here.</p>
+</div>
+
+<footer>
+  EV School for the 2015 Model S 85D pack repair • Mike Sudyk<br>
+  Part of the central data log at 85dlog.5udyk.com
+</footer>
+</body>
+</html>
