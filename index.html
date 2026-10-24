@@ -1,1 +1,72 @@
-PLACEHOLDER
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2015 Tesla Model S 85D Battery Pack Repair Log</title>
+<style>
+body { font-family: system-ui, -apple-system, sans-serif; max-width: 900px; margin: 0 auto; padding: 1rem; line-height: 1.5; background: #111; color: #eee; }
+h1, h2, h3 { color: #4fc3f7; }
+table { border-collapse: collapse; width: 100%; margin: 1rem 0; }
+th, td { border: 1px solid #444; padding: 0.5rem; text-align: left; }
+th { background: #222; }
+.pass { color: #4caf50; font-weight: bold; }
+.fail { color: #f44336; font-weight: bold; }
+.note { background: #1a1a1a; padding: 1rem; border-left: 4px solid #4fc3f7; margin: 1rem 0; }
+a { color: #81d4fa; }
+</style>
+</head>
+<body>
+<h1>2015 Tesla Model S 85D Battery Pack Repair Log</h1>
+<p>VIN: 5YJSA1H25FF091116 &nbsp;|&nbsp; Central data site: 85Dlog.5udyk.com</p>
+
+<div class="note">
+<strong>Current Status (Oct 24, 2026):</strong> Pack dropped and opened. Water previously confirmed in pyro fuse cavity. Module 9 (bunkhouse, with Module 8) showed heavy terminal corrosion and initially failed TBMM due to detached sense wires. After riveting the green, brown, and orange sense wires, Module 9 now PASSES cleanly at 5 mV imbalance. Other tested modules (12, 14, 15) also PASS. Priority remaining: Modules 6/7/8 and full sense-wire / BMB inspection.
+</div>
+
+<h2>Module 9 – TBMM Results</h2>
+<p><strong>Physical:</strong> Significant rust/corrosion on several cell terminals and busbar areas. Sensor wires initially detached on green, brown, and orange (others attached).</p>
+
+<table>
+<thead><tr><th>Test</th><th>Before (detached wires)</th><th>After (wires fixed)</th></tr></thead>
+<tbody>
+<tr><td>Module voltage</td><td>22.53 V</td><td>22.53 V</td></tr>
+<tr><td>High / Low cell</td><td>3.847 V / 3.664 V</td><td>3.756 V / 3.751 V</td></tr>
+<tr><td>Imbalance</td><td class="fail">182–183 mV (FAIL)</td><td class="pass">5 mV (PASS)</td></tr>
+<tr><td>Temps</td><td>14.8 °C / 14.7 °C</td><td>15.2 °C / 15.1 °C</td></tr>
+<tr><td>Variance</td><td>Hi=42 mV, 6 cells >5 mV</td><td>Max 1 mV, 0 cells >5 mV</td></tr>
+<tr><td>Result</td><td class="fail">Thumbs-down</td><td class="pass">Thumbs-up</td></tr>
+</tbody>
+</table>
+<p>Sense-wire repair (riveting method) resolved the false high imbalance. Terminal corrosion does not appear to affect cell voltage balance on out-of-pack TBMM.</p>
+
+<h2>Other Module TBMM Results (summary)</h2>
+<ul>
+<li>Module 12: PASS 4 mV (after bottom orange sense wire riveted)</li>
+<li>Module 14: PASS 3–4 mV</li>
+<li>Module 15: PASS 3–4 mV (22.50 V, cells 3.747–3.751 V)</li>
+<li>Module 16: Initially FAIL 146 mV (detached orange/green); repaired</li>
+</ul>
+
+<h2>Timeline</h2>
+<ul>
+<li><strong>Oct 24, 2026:</strong> Module 9 sense wires (green, brown, orange) riveted. Post-repair TBMM PASS at 5 mV imbalance (was 183 mV FAIL).</li>
+<li><strong>Oct 23, 2026:</strong> Module 9 visual inspection – significant rust/corrosion on cell terminals and busbar areas. Sensor wires and TBMM not yet checked at that time.</li>
+<li><strong>Oct 21, 2026:</strong> Module 12 bottom orange sense wire riveted. Post-repair TBMM PASS 4 mV.</li>
+<li>Earlier: Pack dropped, opened, water found in pyro fuse cavity. Pre-pull SMT data logged (pack ~361 V, CAC 208–211 Ah).</li>
+</ul>
+
+<h2>To-Do / Next Steps</h2>
+<ul>
+<li>Complete sense-wire and TBMM checks on remaining modules (especially 6, 7, 8).</li>
+<li>Inspect Module 8 (paired with 9 in bunkhouse).</li>
+<li>Decide path: continue repair vs. 14-module conversion (remove 8/9) vs. full pack replacement for long-term.</li>
+<li>Document BMB connector and pyro fuse status.</li>
+</ul>
+
+<h2>Notes</h2>
+<p>Sense Wire Repair Guide (riveting method) previously added. Photos of Module 9 corrosion and TBMM screens available in project records. Total invested ~$7,300. Estimated remaining repair costs low if only connectors/sense wires; full pack replacement higher but lower risk for multi-year ownership.</p>
+
+<p><a href="ev-school.html">EV School</a> | Last updated: 2026-10-24</p>
+</body>
+</html>
