@@ -1,1 +1,640 @@
-$(cat /tmp/updated_index.html)
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2015 Model S 85D Pack Repair Log</title>
+<style>
+:root {
+  --bg: #0d1117;
+  --card: #161b22;
+  --border: #30363d;
+  --text: #e6edf3;
+  --muted: #8b949e;
+  --green: #3fb950;
+  --yellow: #d29922;
+  --red: #f85149;
+  --orange: #db6d28;
+  --blue: #58a6ff;
+  --accent: #1f6feb;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+  padding: 12px;
+}
+header {
+  text-align: center;
+  padding: 16px 8px 8px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 16px;
+}
+h1 { font-size: 1.4rem; margin: 0 0 4px; }
+.subtitle { color: var(--muted); font-size: 0.9rem; }
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: center;
+  margin: 12px 0 20px;
+  position: sticky;
+  top: 0;
+  background: var(--bg);
+  padding: 8px 0;
+  z-index: 10;
+}
+nav button {
+  background: var(--card);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+nav button.active, nav button:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+.section { display: none; }
+.section.active { display: block; }
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px;
+  margin-bottom: 14px;
+}
+h2 { font-size: 1.15rem; margin: 0 0 12px; border-bottom: 1px solid var(--border); padding-bottom: 6px; }
+h3 { font-size: 1rem; margin: 12px 0 8px; }
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+  gap: 6px;
+}
+.stat {
+  background: #21262d;
+  border-radius: 4px;
+  padding: 6px 4px;
+  text-align: center;
+}
+.stat .value { font-size: 1.05rem; font-weight: 600; color: var(--blue); line-height: 1.2; }
+.stat .label { font-size: 0.65rem; color: var(--muted); line-height: 1.1; }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+  margin: 8px 0;
+}
+th, td {
+  border: 1px solid var(--border);
+  padding: 6px 8px;
+  text-align: left;
+}
+th { background: #21262d; }
+.flag-flat { color: var(--green); }
+.flag-low { color: var(--orange); }
+.flag-high { color: var(--red); font-weight: 600; }
+.pass { color: var(--green); font-weight: 600; }
+.fail { color: var(--red); font-weight: 600; }
+.pending { color: var(--muted); }
+.ok { color: var(--green); }
+.issue { color: var(--orange); }
+.progress {
+  background: #21262d;
+  border-radius: 4px;
+  height: 20px;
+  margin: 8px 0;
+  overflow: hidden;
+}
+.progress-bar {
+  background: var(--green);
+  height: 100%;
+  width: 25%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  color: #000;
+}
+.highlight {
+  background: #3d2200;
+  border-left: 4px solid var(--orange);
+  padding: 10px;
+  border-radius: 4px;
+  margin: 12px 0;
+}
+.timeline-item {
+  border-left: 2px solid var(--border);
+  padding-left: 12px;
+  margin-bottom: 12px;
+  position: relative;
+}
+.timeline-item::before {
+  content: "";
+  position: absolute;
+  left: -6px;
+  top: 6px;
+  width: 10px;
+  height: 10px;
+  background: var(--blue);
+  border-radius: 50%;
+}
+.module-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+  margin: 12px 0;
+}
+.module-cell {
+  background: #21262d;
+  border-radius: 4px;
+  padding: 8px 4px;
+  text-align: center;
+  font-size: 0.75rem;
+}
+.module-cell.flat { border-bottom: 3px solid var(--green); }
+.module-cell.low { border-bottom: 3px solid var(--orange); }
+.wire-box {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  border-radius: 2px;
+  margin: 0 1px 0 3px;
+  vertical-align: middle;
+  border: 1px solid rgba(255,255,255,0.15);
+}
+.wire-red { background: #f85149; }
+.wire-yellow { background: #e3b341; }
+.wire-blue { background: #58a6ff; }
+.wire-black { background: #484f58; }
+.wire-orange { background: #db6d28; }
+.wire-green { background: #3fb950; }
+.wire-brown { background: #a3712e; }
+.wire-status {
+  font-size: 0.7rem;
+  font-weight: 600;
+  margin-right: 4px;
+  vertical-align: middle;
+}
+.wire-cell {
+  white-space: nowrap;
+  font-size: 0.75rem;
+  line-height: 1.4;
+}
+.bms-box {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  border-radius: 2px;
+  background: #8b949e;
+  margin-right: 4px;
+  vertical-align: middle;
+  border: 1px solid rgba(255,255,255,0.15);
+}
+.pages-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 12px;
+}
+.page-card {
+  background: #21262d;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px;
+  text-decoration: none;
+  color: var(--text);
+  display: block;
+  transition: border-color 0.15s;
+}
+.page-card:hover {
+  border-color: var(--accent);
+}
+.page-card h3 {
+  margin: 0 0 6px;
+  color: var(--blue);
+  font-size: 1rem;
+}
+.page-card p {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+.page-card .url {
+  font-size: 0.75rem;
+  color: var(--accent);
+  margin-top: 6px;
+  display: block;
+}
+ul { margin: 8px 0; padding-left: 18px; }
+li { margin-bottom: 6px; }
+footer { text-align: center; color: var(--muted); font-size: 0.75rem; margin-top: 24px; padding-top: 12px; border-top: 1px solid var(--border); }
+@media (max-width: 480px) {
+  .module-grid { grid-template-columns: repeat(4, 1fr); }
+  table { font-size: 0.75rem; }
+  nav button { padding: 6px 8px; font-size: 0.75rem; }
+}
+</style>
+</head>
+<body>
+<header>
+  <h1>2015 Model S 85D Pack Repair</h1>
+  <div class="subtitle">Central data & steps log • Updated October 2026</div>
+</header>
+
+<nav>
+  <button class="active" data-tab="dashboard">Dashboard</button>
+  <button data-tab="pack">Pack Health</button>
+  <button data-tab="tbmm">TBMM Testing</button>
+  <button data-tab="faults">Fault Codes</button>
+  <button data-tab="explanations">Explanations</button>
+  <button data-tab="timeline">Timeline</button>
+  <button data-tab="pages">Pages</button>
+</nav>
+
+<!-- DASHBOARD -->
+<div id="dashboard" class="section active">
+  <div class="card">
+    <h2>Quick Stats</h2>
+    <div class="stats">
+      <div class="stat"><div class="value">7/16</div><div class="label">Modules Tested</div></div>
+      <div class="stat"><div class="value">4</div><div class="label">Active Faults</div></div>
+      <div class="stat"><div class="value">346 mV</div><div class="label">Max SMT Spread</div></div>
+    </div>
+  </div>
+  <div class="card">
+    <h2>Current Status</h2>
+    <p>Pack dropped and opened in garage. Water confirmed in pyro fuse cavity. Modules 12, 14, 15, 9 & 8 TBMM <strong>PASS</strong> (3–5 mV) after sense-wire repairs. Module 7 improved from 148 mV to 77 mV FAIL after riveting yellow/orange/green (still thumbs-down, troubleshooting). Module 16 initially FAIL 146 mV (later repaired). Module 9 (bunkhouse with 8) had terminal corrosion + detached wires → now PASS. Priority remaining: Module 6 and finish Module 7.</p>
+    <div class="highlight">
+      <strong>Priority next:</strong> Finish Module 7 (now 77 mV FAIL after wire repair; SMT 346 mV), Module 6 (186 mV SMT). Module 8 now PASS 4 mV. Pyro fuse: TPN 1053124-00-A / TSN T15E0022094.
+    </div>
+    <div class="progress"><div class="progress-bar">7/16</div></div>
+  </div>
+  <div class="card">
+    <h2>To-Do List</h2>
+    <ul>
+      <li><strong>Module 12:</strong> Bottom orange sensor wire riveted. Post-repair TBMM: 22.51 V • cells 3.749–3.753 V • 4 mV PASS • 15.0/14.9 °C • thumbs-up. Variance over 6.2 min (158 readings): Hi=268 mV (M1 C3), 2 cells >5 mV. White marks on connector plate bottom noted.</li>
+      <li><strong>Module 9:</strong> Green/brown/orange sense wires riveted. Post-repair TBMM: 22.53 V • cells 3.751–3.756 V • 5 mV PASS • 15.2/15.1 °C • thumbs-up. Heavy terminal/busbar corrosion noted (visual). Variance max 1 mV. (Oct 24)</li>
+      <li><strong>Module 8:</strong> Orange/green/brown sense wires riveted. Post-repair TBMM: ~22.50 V • cells ~3.75 V • 4 mV PASS • thumbs-up. Same wire colors as Module 9. (Oct 24)</li>
+      <li><strong>Module 7:</strong> Yellow/orange/green sense wires riveted. Before: ~148 mV FAIL. After: ~77 mV still FAIL (high/low ~3.792 / 3.715 V). Still thumbs-down. Improved but out of spec; no further change on wiggle test. Continue troubleshooting. (Oct 24)</li>
+      <li><strong>Module 16:</strong> Sense wires repaired (previously detached orange/green). Retest confirmed improved.</li>
+      <li>TBMM remaining priority: Module 6 (186 mV SMT). Finish Module 7 investigation.</li>
+      <li>Inspect sensor leads & BMS boards on remaining modules (especially those with high SMT spreads).</li>
+      <li>Address pyro fuse / cover (TPN 1053124-00-A) — water intrusion source.</li>
+      <li>Continue physical inspection logging as modules are opened.</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h2>Vehicle</h2>
+    <table>
+      <tr><td>VIN</td><td>5YJSA1H25FF091116</td></tr>
+      <tr><td>Miles / Cycles</td><td>117,988 mi / 1,215 cycles</td></tr>
+      <tr><td>Pack</td><td>1058038-00-F (85 kWh, 16-module)</td></tr>
+      <tr><td>Supercharging</td><td>SC01 free (confirmed)</td></tr>
+      <tr><td>Acquisition</td><td>Copart Akron non-runner</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- PACK HEALTH -->
+<div id="pack" class="section">
+  <div class="card">
+    <h2>SMT Pack Summary (June 17–23, 2026)</h2>
+    <table>
+      <tr><th>Metric</th><th>Value</th><th>Notes</th></tr>
+      <tr><td>Pack voltage</td><td>361 V</td><td></td></tr>
+      <tr><td>Cell max / min</td><td>3.968–3.970 / 3.622–3.624 V</td><td>Static</td></tr>
+      <tr><td>Imbalance</td><td>344–348 mV</td><td>No change over 5 days</td></tr>
+      <tr><td>CAC min / max</td><td>208 / 211 Ah</td><td>2.70 Ah spread (~90% of nominal)</td></tr>
+      <tr><td>Temps</td><td>61.7–68.9 °F</td><td>Uniform</td></tr>
+    </table>
+  </div>
+  <div class="card">
+    <h2>Module Voltage Map (SMT Spreads)</h2>
+    <div class="module-grid" id="moduleGrid"></div>
+    <p style="font-size:0.8rem;color:var(--muted)">Green = flat (<10 mV) • Orange = elevated • Red = high priority</p>
+  </div>
+  <div class="card">
+    <h2>Full Module Table</h2>
+    <div style="overflow-x:auto">
+    <table id="moduleTable">
+      <thead><tr><th>Mod</th><th>Low V</th><th>High V</th><th>Spread</th><th>Flag</th></tr></thead>
+      <tbody></tbody>
+    </table>
+    </div>
+  </div>
+</div>
+
+<!-- TBMM -->
+<div id="tbmm" class="section">
+  <div class="card">
+    <h2>TBMM Progress — 7 of 16</h2>
+    <div class="progress"><div class="progress-bar">7/16</div></div>
+    <div class="highlight">
+      <strong>Module 12:</strong> SMT 81 mV → TBMM 4 mV <span class="pass">PASS</span> (connector issue). Post-rivet (orange sense wire): 22.51 V • cells 3.749–3.753 V • 4 mV imbalance • 15.0/14.9 °C • thumbs-up. Variance over 6.2 min (158 readings): Hi=268 mV (M1 C3), 2 cells >5 mV. Physical: looks good; all sensor wires good after orange rivet; white marks on connector plate bottom.<br>
+      <strong>Module 9:</strong> Initial TBMM FAIL 183 mV (detached green/brown/orange sense wires). After riveting: 22.53 V • cells 3.751–3.756 V • 5 mV imbalance • 15.2/15.1 °C • thumbs-up <span class="pass">PASS</span>. Variance max 1 mV. Heavy corrosion on terminals/busbars (visual). Sense-wire repair resolved the imbalance.<br>
+      <strong>Module 8:</strong> Orange/green/brown sense wires riveted (same colors as Module 9). Post-repair: ~22.50 V • cells ~3.75 V • 4 mV imbalance • thumbs-up <span class="pass">PASS</span>. Clean low imbalance. (Oct 24)<br>
+      <strong>Module 7:</strong> Yellow/orange/green sense wires riveted. Before: ~22.51 V, high/low ~3.827/3.679 V, <span class="fail">148 mV FAIL</span>. After: ~22.51 V, high/low ~3.792/3.715 V, <span class="fail">77 mV still FAIL</span>. Still thumbs-down. Improved after the three wires but remained out of spec; no further voltage change on wiggle test. Continue troubleshooting. (Oct 24)<br>
+      <strong>Module 14:</strong> 22.51 V • 3.749–3.753 V • 3–4 mV • 16.5–16.8 °C • <span class="pass">PASS</span>.<br>
+      <strong>Module 15:</strong> 22.50 V • cell groups 3.747–3.751 V • imbalance 3–4 mV • temps 13.5–13.7 °C • variance max 1 mV • <span class="pass">PASS</span>. All sensor wires good (top: red/yellow/blue/black; bottom: orange/green/brown).<br>
+      <strong>Module 16:</strong> 22.51–22.52 V • cells 3.681–3.827 V (5:3.681 / 6:3.827) • imbalance <span class="fail">146 mV FAIL</span> • temps 11.7–12.5 °C. Variance stable. Real cell-group imbalance confirmed. Sensor leads: detached orange and green wires on bottom.
+    </div>
+  </div>
+  <div class="card">
+    <h2>SMT vs TBMM Comparison</h2>
+    <div style="overflow-x:auto">
+    <table>
+      <thead><tr><th>Module</th><th>SMT Spread</th><th>TBMM mV</th><th>Result</th><th>Interpretation</th></tr></thead>
+      <tbody>
+        <tr><td>12</td><td>81</td><td>4</td><td class="pass">PASS</td><td>Connector issue, not cells</td></tr>
+        <tr><td>9</td><td>190</td><td>5</td><td class="pass">PASS</td><td>Sense wires detached → fixed by rivet; corrosion visual only</td></tr>
+        <tr><td>14</td><td>2</td><td>3–4</td><td class="pass">PASS</td><td>Healthy — matches low SMT</td></tr>
+        <tr><td>15</td><td>1</td><td>3–4</td><td class="pass">PASS</td><td>Healthy — matches low SMT</td></tr>
+        <tr><td>16</td><td>150</td><td class="fail">146</td><td class="fail">FAIL</td><td>Real imbalance — detached sense wires</td></tr>
+        <tr><td>7</td><td class="flag-high">346</td><td class="fail">77</td><td class="fail">FAIL</td><td>Improved from 148 mV after yellow/orange/green rivets; still out of spec</td></tr>
+        <tr><td>8</td><td>2</td><td>4</td><td class="pass">PASS</td><td>Orange/green/brown riveted; clean 4 mV</td></tr>
+        <tr><td>6</td><td class="flag-high">186</td><td class="pending">PENDING</td><td>—</td><td>High priority remaining</td></tr>
+        <tr><td>10</td><td>150</td><td class="pending">PENDING</td><td>—</td><td>Medium</td></tr>
+        <tr><td>11</td><td>150</td><td class="pending">PENDING</td><td>—</td><td>Medium</td></tr>
+        <tr><td>1–5,8,13</td><td>1–3</td><td class="pending">PENDING</td><td>—</td><td>Expected PASS</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+  <div class="card">
+    <h2>Physical Inspection (Sensor Leads & BMS Board)</h2>
+    <p style="color:var(--muted);font-size:0.85rem;margin-top:-4px;">Colored boxes = wire color. P = good, F = issue/needs repair, — = not yet checked. Notes in the right column.</p>
+    <div style="overflow-x:auto">
+    <table>
+      <thead>
+        <tr>
+          <th>Module</th>
+          <th>Sensor Wires</th>
+          <th>BMS Board</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>12</td>
+          <td class="wire-cell">
+            <span class="wire-box wire-red" title="Red (top)"></span><span class="wire-status pass">P</span>
+            <span class="wire-box wire-yellow" title="Yellow (top)"></span><span class="wire-status pass">P</span>
+            <span class="wire-box wire-blue" title="Blue (top)"></span><span class="wire-status pass">P</span>
+            <span class="wire-box wire-black" title="Black (top)"></span><span class="wire-status pass">P</span>
+            <span class="wire-box wire-orange" title="Orange (bottom)"></span><span class="wire-status pass">P</span>
+            <span class="wire-box wire-green" title="Green (bottom)"></span><span class="wire-status pass">P</span>
+            <span class="wire-box wire-brown" title="Brown (bottom)"></span><span class="wire-status pass">P</span>
+          </td>
+          <td class="wire-cell"><span class="bms-box"></span><span class="wire-status pending">—</span></td>
+          <td>Bottom orange riveted (now good). White marks on connector plate bottom. All sensor wires good.</td>
+        </tr>
+        <tr>
+          <td>14</td>
+          <td class="wire-cell">
+            <span class="wire-box wire-red"></span><span class="wire-status pending">—</span>
+            <span class="wire-box wire-yellow"></span><span class="wire-status pending">—</span>
+            <span class="wire-box wire-blue"></span><span class="wire-status pending">—</span>
+            <span class="wire-box wire-black"></span><span class="wire-status pending">—</span>
+            <span class="wire-box wire-orange"></span><span class="wire-status pending">—</span>
+            <span class="wire-box wire-green"></span><span class="wire-status pending">—</span>
+            <span class="wire-box wire-brown"></span><span class="wire-status pending">—</span>
+          </td>
+          <td class="wire-cell"><span class="bms-box"></span><span class="wire-status pending">—</span></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>15</td>
+          <td class="wire-cell">
+            <span class="wire-box wire-red"></span><span class="wire-status pass">P</span>
+            <span class="wire-box wire-yellow"></span><span class="wire-status pass">P</span>
+            <span class="wire-box wire-blue"></span><span class="wire-status pass">P</span>
+            <span class="wire-box wire-black"></span><span class="wire-status pass">P</span>
+            <span class="wire-box wire-orange"></span><span class="wire-status pass">P</span>
+            <span class="wire-box wire-green"></span><span class="wire-status pass">P</span>
+            <span class="wire-box wire-brown"></span><span class="wire-status pass">P</span>
+          </td>
+          <td class="wire-cell"><span class="bms-box"></span><span class="wire-status pending">—</span></td>
+          <td>All sensor wires good (top red/yellow/blue/black; bottom orange/green/brown).</td>
+        </tr>
+        <tr>
+          <td>16</td>
+          <td class="wire-cell">
+            <span class="wire-box wire-red"></span><span class="wire-status pending">—</span>
+            <span class="wire-box wire-yellow"></span><span class="wire-status pending">—</span>
+            <span class="wire-box wire-blue"></span><span class="wire-status pending">—</span>
+            <span class="wire-box wire-black"></span><span class="wire-status pending">—</span>
+            <span class="wire-box wire-orange"></span><span class="wire-status fail">F</span>
+            <span class="wire-box wire-green"></span><span class="wire-status fail">F</span>
+            <span class="wire-box wire-brown"></span><span class="wire-status pending">—</span>
+          </td>
+          <td class="wire-cell"><span class="bms-box"></span><span class="wire-status pending">—</span></td>
+          <td>Detached orange and green sense wires (bottom). Real imbalance confirmed.</td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td class="wire-cell">
+            <span class="wire-box wire-red"></span><span class="wire-status pending">—</span>
+            <span class="wire-box wire-yellow"></span><span class="wire-status pending">—</span>
+            <span class="wire-box wire-blue"></span><span class="wire-status pending">—</span>
+            <span class="wire-box wire-black"></span><span class="wire-status pending">—</span>
+            <span class="wire-box wire-orange"></span><span class="wire-status pending">—</span>
+            <span class="wire-box wire-green"></span><span class="wire-status pending">—</span>
+            <span class="wire-box wire-brown"></span><span class="wire-status pending">—</span>
+          </td>
+          <td class="wire-cell"><span class="bms-box"></span><span class="wire-status pending">—</span></td>
+          <td>Highest priority (SMT 346 mV)</td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td class="wire-cell">
+            <span class="wire-box wire-red"></span><span class="wire-status pending">—</span>
+            <span class="wire-box wire-yellow"></span><span class="wire-status pending">—</span>
+            <span class="wire-box wire-blue"></span><span class="wire-status pending">—</span>
+            <span class="wire-box wire-black"></span><span class="wire-status pending">—</span>
+            <span class="wire-box wire-orange"></span><span class="wire-status pending">—</span>
+            <span class="wire-box wire-green"></span><span class="wire-status pending">—</span>
+            <span class="wire-box wire-brown"></span><span class="wire-status pending">—</span>
+          </td>
+          <td class="wire-cell"><span class="bms-box"></span><span class="wire-status pending">—</span></td>
+          <td>High priority (SMT 186 mV)</td>
+        </tr>
+        <tr>
+          <td>9</td>
+          <td class="wire-cell">
+            <span class="wire-box wire-red"></span><span class="wire-status pending">—</span>
+            <span class="wire-box wire-yellow"></span><span class="wire-status pending">—</span>
+            <span class="wire-box wire-blue"></span><span class="wire-status pending">—</span>
+            <span class="wire-box wire-black"></span><span class="wire-status pending">—</span>
+            <span class="wire-box wire-orange"></span><span class="wire-status pending">—</span>
+            <span class="wire-box wire-green"></span><span class="wire-status pending">—</span>
+            <span class="wire-box wire-brown"></span><span class="wire-status pending">—</span>
+          </td>
+          <td class="wire-cell"><span class="bms-box"></span><span class="wire-status pending">—</span></td>
+          <td>High priority (SMT 190 mV)</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+  <div class="card">
+    <h2>Balancing</h2>
+    <p>Use TBMM to balance modules with confirmed imbalance after sense-wire repairs.</p>
+    <table>
+      <tr><th>Module</th><th>Status</th><th>Notes</th></tr>
+      <tr><td>16</td><td class="pending">PENDING</td><td>Repair sense wires first, then retest and balance if still high</td></tr>
+    </table>
+  </div>
+  <div class="card">
+    <h2>Pass Criteria</h2>
+    <ul>
+      <li>Imbalance ≤ 6 mV → PASS</li>
+      <li>High cell ≤ 4.20 V, Low cell ≥ 3.00 V</li>
+    </ul>
+  </div>
+</div>
+
+<!-- FAULTS -->
+<div id="faults" class="section">
+  <div class="card">
+    <h2>Fault Summary</h2>
+    <p>18 of 22 codes cleared with Toolbox 3. 4 remaining:</p>
+    <ul>
+      <li>BMS_f107 — Pyro fuse open (or sense issue)</li>
+      <li>BMS_w107 — Pyro fuse warning</li>
+      <li>BMS_a129 — Cell imbalance</li>
+      <li>BMS_a130 — Cell imbalance</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h2>Root Cause</h2>
+    <p>Pyro fuse cover gasket failure (cover P/N 1020227-00-C) allowed water into the cavity. This is the source of the f107/w107 and likely contributed to sense-wire issues.</p>
+  </div>
+</div>
+
+<!-- EXPLANATIONS -->
+<div id="explanations" class="section">
+  <div class="card">
+    <h2>Connector Issue vs Real Cell Imbalance</h2>
+    <p>SMT high spread with TBMM low spread = BMB/connector or sense-wire problem, not cell degradation.</p>
+    <p>Module 12 example: SMT 81 mV → TBMM 4 mV PASS.</p>
+  </div>
+  <div class="card">
+    <h2>Sense Wire Repair Guide (Riveting Method)</h2>
+    <p>For detached sense wires (e.g. Module 16 orange/green):</p>
+    <ol>
+      <li>Clean the tab and wire end.</li>
+      <li>Use a small rivet or crimp to reattach.</li>
+      <li>Confirm continuity and retest with TBMM.</li>
+    </ol>
+  </div>
+  <div class="card">
+    <h2>How to choose the balance point</h2>
+    <p>After repair, balance to the lowest healthy cell group or the pack average, then recheck.</p>
+  </div>
+</div>
+
+<!-- TIMELINE -->
+<div id="timeline" class="section">
+  <div class="card">
+    <h2>Repair Timeline</h2>
+    <div class="timeline-item"><strong>May 2026</strong> — Purchased Copart Akron non-runner. 22 fault codes.</div>
+    <div class="timeline-item"><strong>May</strong> — Replaced 12V AGM + charge port door (Heli-Coil).</div>
+    <div class="timeline-item"><strong>June 17–23</strong> — SMT readings: 344–348 mV imbalance, healthy CAC 208–211 Ah, static.</div>
+    <div class="timeline-item"><strong>June 20</strong> — Toolbox 3: cleared 18/22 codes, firmware 2025.20.6, brief L1 charge (+7 mi). f107 re-latched.</div>
+    <div class="timeline-item"><strong>July</strong> — Ervine’s diagnostic.</div>
+    <div class="timeline-item"><strong>Oct</strong> — Pack dropped (Vevor jack method), opened. Water in pyro fuse cavity confirmed. Module 12 TBMM: 4 mV PASS (in-pack). Module 14 TBMM: 3–4 mV PASS. Module 15 TBMM: 3–4 mV PASS (22.50 V, cells 3.747–3.751 V, 13.5–13.7 °C). Module 16 TBMM: 146 mV FAIL (22.51–22.52 V, cells 3.681–3.827 V). Pyro fuse TPN 1053124-00-A logged. Module 16 retested after removal — same 146 mV. Detached orange and green sense wires found on bottom of Module 16. Module 12 physical inspection: looks good overall, sensor wires good except bottom orange needs rivet; white marks on connector plate bottom. Module 12 out-of-pack TBMM retest: 22.51 V, cells 3.749–3.753 V, 4 mV, 13.7–13.8 °C (PASS); variance Hi=23 mV over ~2 min. Module 15 physical: all sensor wires good (top red/yellow/blue/black; bottom orange/green/brown). Module 12 bottom orange sense wire riveted; post-repair TBMM: 22.51 V, cells 3.749–3.753 V, 4 mV PASS, 15.0/14.9 °C, thumbs-up (variance Hi=268 mV over 6.2 min / 158 readings). Module 9 (bunkhouse): visual heavy corrosion on terminals/busbars (Oct 23). Initial TBMM FAIL 183 mV with detached green/brown/orange sense wires. After riveting those wires (Oct 24): 22.53 V, cells 3.751–3.756 V, 5 mV PASS, 15.2/15.1 °C, thumbs-up (variance max 1 mV).</div>
+    <div class="timeline-item"><strong>Oct 24 (night)</strong> — Modules 7/8/9 sense-wire repairs. Module 9: 183→5 mV PASS (green/brown/orange). Module 8: 4 mV PASS (orange/green/brown). Module 7: 148→77 mV still FAIL (yellow/orange/green); still thumbs-down, no further change on wiggle.</div>
+    <div class="timeline-item"><strong>Next</strong> — Finish Module 7 investigation (still 77 mV FAIL). TBMM Module 6 (186 mV SMT). Continue remaining modules and pyro fuse work.</div>
+  </div>
+</div>
+
+<!-- PAGES -->
+<div id="pages" class="section">
+  <div class="card">
+    <h2>Related Project Pages</h2>
+    <p style="color:var(--muted);font-size:0.9rem;margin-top:-8px;margin-bottom:14px;">Other sites on 5udyk.com tied to this 85D pack repair and Tesla work.</p>
+    <div class="pages-grid">
+      <a class="page-card" href="ev-school.html">
+        <h3>EV School</h3>
+        <p>Lessons for kids (ages 5–15) on battery basics, series/parallel wiring, and how this 85D pack is built. Includes garage activities for the real modules.</p>
+        <span class="url">ev-school.html</span>
+      </a>
+      <a class="page-card" href="https://tpm.5udyk.com/" target="_blank">
+        <h3>Tesla Pack Monitor</h3>
+        <p>DIY diagnostic tool project guide. Portable CAN reader for classic Model S/X packs — brick voltages, temps, and imbalance without a laptop.</p>
+        <span class="url">tpm.5udyk.com</span>
+      </a>
+      <a class="page-card" href="https://battery.5udyk.com/" target="_blank">
+        <h3>85D Pack Drop Guide</h3>
+        <p>Notes for dropping the pack on this 2015 Model S 85D in the driveway using floor jacks instead of a lift.</p>
+        <span class="url">battery.5udyk.com</span>
+      </a>
+      <a class="page-card" href="https://teslapack.5udyk.com/" target="_blank">
+        <h3>Video vs This Pack</h3>
+        <p>Out of Spec battery-failure video mapped onto this car’s Scan My Tesla snapshot so failure modes can be checked in order.</p>
+        <span class="url">teslapack.5udyk.com</span>
+      </a>
+      <a class="page-card" href="https://85d.5udyk.com/" target="_blank">
+        <h3>Auction Dossier</h3>
+        <p>Research dossier on this specific 2015 85D (VIN 5YJSA1H25FF091116) — features, Supercharging, recalls, and risks from the Copart listing.</p>
+        <span class="url">85d.5udyk.com</span>
+      </a>
+      <a class="page-card" href="https://tesla.5udyk.com/" target="_blank">
+        <h3>Tesla Hunter</h3>
+        <p>Search notes for a 2013–2017 Model S with dual motor, rear-facing jump seats, and transferable free Supercharging.</p>
+        <span class="url">tesla.5udyk.com</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  Central data log for 2015 Model S 85D (5YJSA1H25FF091116) pack repair • Mike Sudyk<br>
+  Data from SMT June 2026, Toolbox, TBMM Oct 2026 (Modules 12, 14, 15 & 16), physical inspection. Ready for 85Dlog.5udyk.com
+</footer>
+
+<script>
+const modules = [
+  {m:1, low:3.791, high:3.793, spread:2, flag:"FLAT"},
+  {m:2, low:3.791, high:3.793, spread:2, flag:"FLAT"},
+  {m:3, low:3.791, high:3.794, spread:3, flag:"FLAT"},
+  {m:4, low:3.791, high:3.794, spread:3, flag:"FLAT"},
+  {m:5, low:3.792, high:3.794, spread:2, flag:"FLAT"},
+  {m:6, low:3.671, high:3.857, spread:186, flag:"LOW"},
+  {m:7, low:3.621, high:3.967, spread:346, flag:"LOW"},
+  {m:8, low:3.791, high:3.793, spread:2, flag:"FLAT"},
+  {m:9, low:3.710, high:3.900, spread:190, flag:"LOW"},
+  {m:10, low:3.725, high:3.875, spread:150, flag:"LOW"},
+  {m:11, low:3.740, high:3.890, spread:150, flag:"LOW"},
+  {m:12, low:3.791, high:3.872, spread:81, flag:"MODERATE"},
+  {m:13, low:3.791, high:3.793, spread:2, flag:"FLAT"},
+  {m:14, low:3.791, high:3.793, spread:2, flag:"FLAT"},
+  {m:15, low:3.792, high:3.793, spread:1, flag:"FLAT"},
+  {m:16, low:3.748, high:3.898, spread:150, flag:"LOW"}
+];
+
+const grid = document.getElementById("moduleGrid");
+const tbody = document.querySelector("#moduleTable tbody");
+modules.forEach(mod => {
+  const cls = mod.spread <= 5 ? "flat" : mod.spread >= 150 ? "high" : "low";
+  grid.innerHTML += `<div class="module-cell ${cls}">M${mod.m}<br>${mod.spread} mV</div>`;
+  const flagCls = mod.flag === "FLAT" ? "flag-flat" : mod.flag === "LOW" ? "flag-high" : "flag-low";
+  tbody.innerHTML += `<tr><td>${mod.m}</td><td>${mod.low}</td><td>${mod.high}</td><td>${mod.spread}</td><td class="${flagCls}">${mod.flag}</td></tr>`;
+});
+
+document.querySelectorAll("nav button").forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll("nav button").forEach(b => b.classList.remove("active"));
+    document.querySelectorAll(".section").forEach(s => s.classList.remove("active"));
+    btn.classList.add("active");
+    document.getElementById(btn.dataset.tab).classList.add("active");
+  });
+});
+</script>
+</body>
+</html>
