@@ -261,18 +261,24 @@ footer { text-align: center; color: var(--muted); font-size: 0.75rem; margin-top
   <div class="card">
     <h2>Quick Stats</h2>
     <div class="stats">
-      <div class="stat"><div class="value">7/16</div><div class="label">Modules Tested</div></div>
+      <div class="stat"><div class="value">8/16</div><div class="label">Modules Tested</div></div>
       <div class="stat"><div class="value">4</div><div class="label">Active Faults</div></div>
       <div class="stat"><div class="value">346 mV</div><div class="label">Max SMT Spread</div></div>
     </div>
   </div>
   <div class="card">
     <h2>Current Status</h2>
-    <p>Pack dropped and opened in garage. Water confirmed in pyro fuse cavity. Modules 12, 14, 15, 9 & 8 TBMM <strong>PASS</strong> (3–5 mV) after sense-wire repairs. Module 7 improved from 148 mV to 77 mV FAIL after riveting yellow/orange/green (still thumbs-down, troubleshooting). Module 16 initially FAIL 146 mV (later repaired). Module 9 (bunkhouse with 8) had terminal corrosion + detached wires → now PASS. Priority remaining: Module 6 and finish Module 7.</p>
+    <p>Pack dropped and opened in garage. Water confirmed in pyro fuse cavity. Modules 12, 13, 14, 15, 9, 8 & 16 TBMM <strong>PASS</strong> (3–5 mV) after sense-wire repairs or visual confirmation. Module 7 improved from 148 mV to 77 mV FAIL after riveting yellow/orange/green (still thumbs-down, troubleshooting). Module 16: green+orange repaired → clean 5 mV PASS (was 148 mV). Priority remaining: Module 6 and finish Module 7.</p>
     <div class="highlight">
       <strong>Priority next:</strong> Finish Module 7 (now 77 mV FAIL after wire repair; SMT 346 mV), Module 6 (186 mV SMT). Module 8 now PASS 4 mV. Pyro fuse: TPN 1053124-00-A / TSN T15E0022094.
     </div>
-    <div class="progress"><div class="progress-bar">7/16</div></div>
+    <div class="progress"><div class="progress-bar" style="width:50%">8/16</div></div>
+  </div>
+  <div class="card">
+    <h2>Interactive Pack Map</h2>
+    <p style="color:var(--muted);font-size:0.9rem;margin-top:-6px;">Tap any module for SMT bricks, current TBMM results, and repair notes. Also available as a full page.</p>
+    <iframe src="pack-map.html" style="width:100%;height:520px;border:1px solid #30363d;border-radius:8px;background:#0d1117;" title="Interactive Pack Map"></iframe>
+    <p style="font-size:0.8rem;margin-top:8px;"><a href="pack-map.html" style="color:#58a6ff;">Open full-screen pack map →</a></p>
   </div>
   <div class="card">
     <h2>To-Do List</h2>
@@ -281,7 +287,9 @@ footer { text-align: center; color: var(--muted); font-size: 0.75rem; margin-top
       <li><strong>Module 9:</strong> Green/brown/orange sense wires riveted. Post-repair TBMM: 22.53 V • cells 3.751–3.756 V • 5 mV PASS • 15.2/15.1 °C • thumbs-up. Heavy terminal/busbar corrosion noted (visual). Variance max 1 mV. (Oct 24)</li>
       <li><strong>Module 8:</strong> Orange/green/brown sense wires riveted. Post-repair TBMM: ~22.50 V • cells ~3.75 V • 4 mV PASS • thumbs-up. Same wire colors as Module 9. (Oct 24)</li>
       <li><strong>Module 7:</strong> Yellow/orange/green sense wires riveted. Before: ~148 mV FAIL. After: ~77 mV still FAIL (high/low ~3.792 / 3.715 V). Still thumbs-down. Improved but out of spec; no further change on wiggle test. Continue troubleshooting. (Oct 24)</li>
-      <li><strong>Module 16:</strong> Sense wires repaired (previously detached orange/green). Retest confirmed improved.</li>
+      <li><strong>Module 16:</strong> Green + orange sense wires repaired. Before: 148 mV FAIL (B5 3.680 / B6 3.828). After: 5 mV PASS (bricks tightly 3.750–3.755 V). Confirmed sense-wire issue.</li>
+      <li><strong>Module 13:</strong> 4 mV PASS (22.51 V, bricks 3.749–3.753 V). Visual inspection all good.</li>
+      <li><strong>Module 14:</strong> 3–4 mV PASS (22.50 V, bricks 3.748–3.751 V). Visual inspection confirmed good.</li>
       <li>TBMM remaining priority: Module 6 (186 mV SMT). Finish Module 7 investigation.</li>
       <li>Inspect sensor leads & BMS boards on remaining modules (especially those with high SMT spreads).</li>
       <li>Address pyro fuse / cover (TPN 1053124-00-A) — water intrusion source.</li>
@@ -332,8 +340,8 @@ footer { text-align: center; color: var(--muted); font-size: 0.75rem; margin-top
 <!-- TBMM -->
 <div id="tbmm" class="section">
   <div class="card">
-    <h2>TBMM Progress — 7 of 16</h2>
-    <div class="progress"><div class="progress-bar">7/16</div></div>
+    <h2>TBMM Progress — 8 of 16</h2>
+    <div class="progress"><div class="progress-bar" style="width:50%">8/16</div></div>
     <div class="highlight">
       <strong>Module 12:</strong> SMT 81 mV → TBMM 4 mV <span class="pass">PASS</span> (connector issue). Post-rivet (orange sense wire): 22.51 V • cells 3.749–3.753 V • 4 mV imbalance • 15.0/14.9 °C • thumbs-up. Variance over 6.2 min (158 readings): Hi=268 mV (M1 C3), 2 cells >5 mV. Physical: looks good; all sensor wires good after orange rivet; white marks on connector plate bottom.<br>
       <strong>Module 9:</strong> Initial TBMM FAIL 183 mV (detached green/brown/orange sense wires). After riveting: 22.53 V • cells 3.751–3.756 V • 5 mV imbalance • 15.2/15.1 °C • thumbs-up <span class="pass">PASS</span>. Variance max 1 mV. Heavy corrosion on terminals/busbars (visual). Sense-wire repair resolved the imbalance.<br>
@@ -341,7 +349,7 @@ footer { text-align: center; color: var(--muted); font-size: 0.75rem; margin-top
       <strong>Module 7:</strong> Yellow/orange/green sense wires riveted. Before: ~22.51 V, high/low ~3.827/3.679 V, <span class="fail">148 mV FAIL</span>. After: ~22.51 V, high/low ~3.792/3.715 V, <span class="fail">77 mV still FAIL</span>. Still thumbs-down. Improved after the three wires but remained out of spec; no further voltage change on wiggle test. Continue troubleshooting. (Oct 24)<br>
       <strong>Module 14:</strong> 22.51 V • 3.749–3.753 V • 3–4 mV • 16.5–16.8 °C • <span class="pass">PASS</span>.<br>
       <strong>Module 15:</strong> 22.50 V • cell groups 3.747–3.751 V • imbalance 3–4 mV • temps 13.5–13.7 °C • variance max 1 mV • <span class="pass">PASS</span>. All sensor wires good (top: red/yellow/blue/black; bottom: orange/green/brown).<br>
-      <strong>Module 16:</strong> 22.51–22.52 V • cells 3.681–3.827 V (5:3.681 / 6:3.827) • imbalance <span class="fail">146 mV FAIL</span> • temps 11.7–12.5 °C. Variance stable. Real cell-group imbalance confirmed. Sensor leads: detached orange and green wires on bottom.
+      <strong>Module 16:</strong> Before: 22.52 V, bricks 3.749/3.753/3.711/3.795/3.680/3.828 V, <span class="fail">148 mV FAIL</span>. After green+orange repair: 22.51–22.52 V, bricks 3.750/3.753/3.752/3.753/3.752/3.755 V, <span class="pass">5 mV PASS</span>, 14.7 °C, thumbs-up. Sense-wire issue confirmed.
     </div>
   </div>
   <div class="card">
@@ -549,6 +557,7 @@ footer { text-align: center; color: var(--muted); font-size: 0.75rem; margin-top
     <div class="timeline-item"><strong>July</strong> — Ervine’s diagnostic.</div>
     <div class="timeline-item"><strong>Oct</strong> — Pack dropped (Vevor jack method), opened. Water in pyro fuse cavity confirmed. Module 12 TBMM: 4 mV PASS (in-pack). Module 14 TBMM: 3–4 mV PASS. Module 15 TBMM: 3–4 mV PASS (22.50 V, cells 3.747–3.751 V, 13.5–13.7 °C). Module 16 TBMM: 146 mV FAIL (22.51–22.52 V, cells 3.681–3.827 V). Pyro fuse TPN 1053124-00-A logged. Module 16 retested after removal — same 146 mV. Detached orange and green sense wires found on bottom of Module 16. Module 12 physical inspection: looks good overall, sensor wires good except bottom orange needs rivet; white marks on connector plate bottom. Module 12 out-of-pack TBMM retest: 22.51 V, cells 3.749–3.753 V, 4 mV, 13.7–13.8 °C (PASS); variance Hi=23 mV over ~2 min. Module 15 physical: all sensor wires good (top red/yellow/blue/black; bottom orange/green/brown). Module 12 bottom orange sense wire riveted; post-repair TBMM: 22.51 V, cells 3.749–3.753 V, 4 mV PASS, 15.0/14.9 °C, thumbs-up (variance Hi=268 mV over 6.2 min / 158 readings). Module 9 (bunkhouse): visual heavy corrosion on terminals/busbars (Oct 23). Initial TBMM FAIL 183 mV with detached green/brown/orange sense wires. After riveting those wires (Oct 24): 22.53 V, cells 3.751–3.756 V, 5 mV PASS, 15.2/15.1 °C, thumbs-up (variance max 1 mV).</div>
     <div class="timeline-item"><strong>Oct 24 (night)</strong> — Modules 7/8/9 sense-wire repairs. Module 9: 183→5 mV PASS (green/brown/orange). Module 8: 4 mV PASS (orange/green/brown). Module 7: 148→77 mV still FAIL (yellow/orange/green); still thumbs-down, no further change on wiggle.</div>
+    <div class="timeline-item"><strong>Oct 26</strong> — Module 16 green+orange sense wires repaired: 148 mV FAIL → 5 mV PASS (bricks tightly 3.750–3.755 V). Module 13: 4 mV PASS (visual all good). Module 14: 3–4 mV PASS (visual confirmed good). Interactive pack-map.html added.</div>
     <div class="timeline-item"><strong>Next</strong> — Finish Module 7 investigation (still 77 mV FAIL). TBMM Module 6 (186 mV SMT). Continue remaining modules and pyro fuse work.</div>
   </div>
 </div>
@@ -563,6 +572,11 @@ footer { text-align: center; color: var(--muted); font-size: 0.75rem; margin-top
         <h3>EV School</h3>
         <p>Lessons for kids (ages 5–15) on battery basics, series/parallel wiring, and how this 85D pack is built. Includes garage activities for the real modules.</p>
         <span class="url">ev-school.html</span>
+      </a>
+      <a class="page-card" href="pack-map.html">
+        <h3>Interactive Pack Map</h3>
+        <p>Mobile-friendly top-down map of all 16 modules. Tap any module for SMT brick voltages (color-coded), current TBMM results, sense-wire repairs, and visual notes. Updated live as testing progresses.</p>
+        <span class="url">pack-map.html</span>
       </a>
       <a class="page-card" href="https://tpm.5udyk.com/" target="_blank">
         <h3>Tesla Pack Monitor</h3>

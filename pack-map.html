@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>2015 Model S 85D — Interactive Pack Map</title>
+<style>
+  :root {
+    --bg: #0d1117;
+    --card: #161b22;
+    --text: #e6edf3;
+    --muted: #8b949e;
+    --red: #f85149;
+    --orange: #d29922;
+    --green: #3fb950;
+    --blue: #58a6ff;
+    --low: #f85149;
+    --high: #58a6ff;
+    --mild: #d29922;
+    --healthy: #3fb950;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    padding: 12px;
+    -webkit-tap-highlight-color: transparent;
+  }
+  h1 { font-size: 1.4rem; margin: 0 0 4px; }
+  .subtitle { color: var(--muted); font-size: 0.85rem; margin-bottom: 16px; }
+  .legend {
+    display: flex; flex-wrap: wrap; gap: 8px; font-size: 0.75rem; margin-bottom: 12px;
+  }
+  .legend span { display: flex; align-items: center; gap: 4px; }
+  .dot { width: 12px; height: 12px; border-radius: 3px; display: inline-block; }
+  .pack {
+    display: flex; flex-direction: column; align-items: center; gap: 6px; margin-bottom: 20px;
+  }
+  .front-stacks {
+    display: flex; flex-direction: column; gap: 4px; align-items: center;
+  }
+  .side-rows {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+    width: 100%;
+    max-width: 380px;
+  }
+  .module-btn {
+    background: var(--card);
+    border: 2px solid #30363d;
+    border-radius: 8px;
+    padding: 6px 4px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    position: relative;
+    min-height: 52px;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+  }
+  .module-btn.red { border-color: var(--red); background: #2d1a1a; }
+  .module-btn.orange { border-color: var(--orange); background: #2a2214; }
+  .module-btn.green { border-color: var(--green); background: #1a2a1e; }
+  .module-btn.confirmed { border-color: var(--green); background: #1a2a1e; position: relative; }
+  .module-btn.confirmed::after {
+    content: "✓ GOOD";
+    position: absolute;
+    top: 2px;
+    right: 3px;
+    font-size: 0.55rem;
+    background: var(--green);
+    color: #0d1117;
+    padding: 1px 3px;
+    border-radius: 4px;
+    font-weight: 700;
+  }
+  .module-btn .num { font-size: 1.05rem; }
+  .module-btn .status { font-size: 0.65rem; color: var(--muted); margin-top: 2px; }
+  .stack { width: 140px; }
+  .detail-overlay {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 100;
+    display: none; align-items: flex-end; justify-content: center;
+  }
+  .detail-overlay.show { display: flex; }
+  .detail-panel {
+    background: #0d1117; width: 100%; max-width: 480px; max-height: 85vh;
+    border-radius: 16px 16px 0 0; padding: 16px; overflow-y: auto;
+    border-top: 1px solid #30363d;
+  }
+  .detail-header {
+    display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;
+  }
+  .close-btn {
+    background: #21262d; border: none; color: var(--text); width: 36px; height: 36px;
+    border-radius: 50%; font-size: 1.2rem; cursor: pointer;
+  }
+  .brick-grid {
+    display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 4px; margin: 10px 0;
+  }
+  .brick {
+    background: #21262d; border-radius: 6px; padding: 8px 4px; text-align: center; font-size: 0.8rem;
+  }
+  .brick.low { background: #3d1f1f; color: #ffb3b3; }
+  .brick.high { background: #1a2a3d; color: #a8d4ff; }
+  .brick.mild { background: #3d2f14; color: #ffd9a8; }
+  .brick.healthy { background: #1a2e22; color: #b3e6c8; }
+  .section { margin: 14px 0; }
+  .section h3 { margin: 0 0 6px; font-size: 0.95rem; color: var(--blue); }
+  .kv { display: flex; justify-content: space-between; font-size: 0.85rem; padding: 3px 0; border-bottom: 1px solid #21262d; }
+  .kv span:last-child { font-weight: 500; }
+  .notes { background: #161b22; padding: 10px; border-radius: 8px; font-size: 0.85rem; line-height: 1.4; }
+  .priority { font-size: 0.75rem; padding: 2px 8px; border-radius: 12px; background: #21262d; }
+  .front-label { font-size: 0.7rem; color: var(--muted); margin-bottom: 4px; }
+</style>
+</head>
+<body>
+<h1>2015 Model S 85D Pack Map</h1>
+<p class="subtitle">Tap any module for SMT bricks + TBMM results (current brick voltages shown where measured).<br>Updated from 85D_Module_Brick_Voltages_SMT_TBMM.xlsx · Oct 2026</p>
+
+<div class="legend">
+  <span><i class="dot" style="background:var(--green)"></i> Confirmed Good (✓ GOOD)</span>
+  <span><i class="dot" style="background:var(--red)"></i> Open First / Needs Work</span>
+  <span><i class="dot" style="background:var(--orange)"></i> Mild / Second</span>
+  <span><i class="dot" style="background:var(--low)"></i> Low <~3.70V</span>
+  <span><i class="dot" style="background:var(--high)"></i> High >~3.82V</span>
+</div>
+
+<div class="pack">
+  <div class="front-label">FRONT OF CAR ↑</div>
+  <div class="front-stacks">
+    <button class="module-btn confirmed stack" data-mod="9">M9<br><span class="status">CONFIRMED · Top Stack</span></button>
+    <button class="module-btn confirmed stack" data-mod="8">M8<br><span class="status">CONFIRMED · Bottom Stack</span></button>
+  </div>
+  <div class="side-rows">
+    <!-- Left row: front to rear M7→M1 -->
+    <div style="display:flex;flex-direction:column;gap:6px;">
+      <button class="module-btn red" data-mod="7">M7<br><span class="status">OPEN FIRST</span></button>
+      <button class="module-btn red" data-mod="6">M6<br><span class="status">OPEN FIRST</span></button>
+      <button class="module-btn green" data-mod="5">M5<br><span class="status">HEALTHY</span></button>
+      <button class="module-btn green" data-mod="4">M4<br><span class="status">HEALTHY</span></button>
+      <button class="module-btn orange" data-mod="3">M3<br><span class="status">SECOND</span></button>
+      <button class="module-btn green" data-mod="2">M2<br><span class="status">HEALTHY</span></button>
+      <button class="module-btn orange" data-mod="1">M1<br><span class="status">SECOND</span></button>
+    </div>
+    <!-- Right row: front to rear M10→M16 -->
+    <div style="display:flex;flex-direction:column;gap:6px;">
+      <button class="module-btn red" data-mod="10">M10<br><span class="status">OPEN FIRST</span></button>
+      <button class="module-btn red" data-mod="11">M11<br><span class="status">OPEN FIRST</span></button>
+      <button class="module-btn confirmed" data-mod="12">M12<br><span class="status">CONFIRMED</span></button>
+      <button class="module-btn green confirmed" data-mod="13">M13<br><span class="status">CONFIRMED</span></button>
+      <button class="module-btn green confirmed" data-mod="14">M14<br><span class="status">CONFIRMED</span></button>
+      <button class="module-btn confirmed" data-mod="15">M15<br><span class="status">CONFIRMED</span></button>
+      <button class="module-btn green confirmed" data-mod="16">M16<br><span class="status">CONFIRMED</span></button>
+    </div>
+  </div>
+  <div class="front-label" style="margin-top:8px;">REAR OF CAR</div>
+</div>
+
+<div id="overlay" class="detail-overlay">
+  <div class="detail-panel" id="panel"></div>
+</div>
+
+<script>
+const data = {
+  1: { status:"SECOND", color:"orange", bricks:[3.759,3.759,3.718,3.799,3.759,3.759], smt:2, tbmm:"PENDING", wires:"Not inspected", visual:"Pending", notes:"Mild B3/B4 pair. Expected healthy on TBMM." },
+  2: { status:"HEALTHY", color:"green", bricks:[3.761,3.764,3.761,3.763,3.761,3.762], smt:2, tbmm:"PENDING (SMT healthy)", wires:"Not inspected", visual:"Pending", notes:"Tight/healthy SMT (2 mV). Expected PASS on TBMM." },
+  3: { status:"SECOND", color:"orange", bricks:[3.766,3.767,3.741,3.793,3.766,3.766], smt:3, tbmm:"PENDING", wires:"Not inspected", visual:"Pending", notes:"Mild B3/B4 pair. Expected healthy." },
+  4: { status:"HEALTHY", color:"green", bricks:[3.766,3.767,3.765,3.767,3.766,3.766], smt:3, tbmm:"PENDING (SMT healthy)", wires:"Not inspected", visual:"Pending", notes:"Tight/healthy SMT (3 mV)." },
+  5: { status:"HEALTHY", color:"green", bricks:[3.765,3.766,3.764,3.765,3.764,3.765], smt:2, tbmm:"PENDING (SMT healthy)", wires:"Not inspected", visual:"Pending", notes:"Tight/healthy SMT (2 mV)." },
+  6: { status:"OPEN FIRST", color:"red", bricks:[3.764,3.764,3.717,3.810,3.671,3.857], smt:186, tbmm:"PENDING", wires:"Not yet checked", visual:"Priority remaining", notes:"PENDING - SMT 186 mV high priority. B5-low / B6-high pattern (possible BMB caps or sense wire). Next to test after Module 7." },
+  7: { status:"OPEN FIRST", color:"red", bricks:[3.764,3.765,3.622,3.698,3.775,3.965], smt:346, tbmm:"77 mV FAIL (after repair)", wires:"Yellow / Orange / Green riveted", visual:"Continued troubleshooting", notes:"After yellow/orange/green rivets: ~22.51 V, ~3.715-3.792 V, 77 mV FAIL (improved from 148 mV); still thumbs-down. Pack min/max live here." },
+  8: { status:"CONFIRMED", color:"green", bricks:[3.763,3.763,3.726,3.800,3.762,3.763], smt:2, tbmm:"4 mV PASS", wires:"Orange / Green / Brown riveted", visual:"PASS (thumbs-up)", notes:"Post-repair (orange/green/brown riveted): ~22.50 V, cells ~3.75 V, 4 mV PASS, thumbs-up. Confirmed good." },
+  9: { status:"CONFIRMED", color:"green", bricks:[3.767,3.767,3.723,3.811,3.673,3.862], smt:190, tbmm:"5 mV PASS (after repair)", wires:"Green / Brown / Orange riveted (were detached)", visual:"Heavy terminal/busbar corrosion noted (visual)", notes:"Post-repair (green/brown/orange riveted): 22.53 V, cells 3.751-3.756 V, 5 mV PASS, thumbs-up; was 183 mV FAIL. Confirmed good." },
+  10:{ status:"OPEN FIRST", color:"red", bricks:[3.786,3.745,3.763,3.765,3.685,3.844], smt:150, tbmm:"PENDING", wires:"Not inspected", visual:"Pending", notes:"B5-low / B6-high pattern. Medium priority. Possible BMB or sense issue." },
+  11:{ status:"OPEN FIRST", color:"red", bricks:[3.764,3.765,3.764,3.764,3.679,3.849], smt:150, tbmm:"PENDING", wires:"Not inspected", visual:"Pending", notes:"B5-low / B6-high pattern. Medium priority." },
+  12:{ status:"CONFIRMED", color:"green", bricks:[3.764,3.764,3.723,3.804,3.763,3.764], smt:81, tbmm:"4 mV PASS", wires:"Bottom Orange riveted (now all good)", visual:"Looks good; white marks on connector plate bottom", notes:"Post-repair (orange sense wire riveted): 22.51 V, cells 3.749-3.753 V, 4 mV PASS, 15.0/14.9 °C, thumbs-up; SMT was 81 mV. Confirmed good." },
+  13:{ status:"CONFIRMED", color:"green", bricks:[3.765,3.765,3.764,3.765,3.765,3.765], tbmmBricks:[3.749,3.753,3.751,3.752,3.751,3.751], smt:2, tbmm:"4 mV PASS", wires:"All good (visual inspection complete)", visual:"All good — inspected", notes:"TBMM: 22.51 V, bricks 3.749/3.753/3.751/3.752/3.751/3.751 V, 4 mV PASS, 14.5–14.6 °C, thumbs-up. Variance max 1 mV (0 cells >5 mV). Visual inspection complete and good. Matches healthy SMT." },
+  14:{ status:"CONFIRMED", color:"green", bricks:[3.764,3.763,3.764,3.764,3.764,3.764], tbmmBricks:[3.748,3.751,3.751,3.751,3.751,3.750], smt:2, tbmm:"3–4 mV PASS", wires:"All good (no repairs needed)", visual:"Visual inspection confirmed good", notes:"TBMM: 22.50 V, bricks 3.748/3.751/3.751/3.751/3.751/3.750 V, 3–4 mV PASS, 14.5 °C, thumbs-up. Variance max 1 mV (0 cells >5 mV). Visual inspection confirmed good. Matches healthy SMT." },
+  15:{ status:"CONFIRMED", color:"green", bricks:[3.763,3.763,3.763,3.763,3.763,3.763], smt:1, tbmm:"3–4 mV PASS", wires:"All good (top: red/yellow/blue/black; bottom: orange/green/brown)", visual:"PASS", notes:"TBMM: 22.50 V, cells 3.747-3.751 V, 3-4 mV PASS, 13.5-13.7 °C; matches low SMT. All sensor wires explicitly inspected/good. Confirmed good." },
+  16:{ status:"CONFIRMED", color:"green", bricks:[3.765,3.765,3.722,3.807,3.691,3.842], tbmmBricks:[3.750,3.753,3.752,3.753,3.752,3.755], smt:150, tbmm:"5 mV PASS (after repair)", wires:"Orange & Green (bottom) repaired — now all good", visual:"Detached sense wires fixed; now PASS", notes:"Before: 22.52 V, bricks 3.749/3.753/3.711/3.795/3.680/3.828 V, 148 mV FAIL. After green+orange sense-wire repair: 22.51–22.52 V, bricks tightly 3.750–3.755 V (1:3.750, 2:3.753, 3:3.752, 4:3.753, 5:3.752, 6:3.755), 5 mV PASS, 14.7 °C, thumbs-up. Confirmed sense-wire issue, not cells." }
+};
+
+function brickClass(v) {
+  if (v < 3.70) return "low";
+  if (v > 3.82) return "high";
+  if (v < 3.74 || v > 3.80) return "mild";
+  return "healthy";
+}
+
+function showDetail(id) {
+  const m = data[id];
+  const bricksHtml = m.bricks.map((v,i) => 
+    `<div class="brick ${brickClass(v)}">B${i+1}<br>${v.toFixed(3)}</div>`
+  ).join("");
+  let tbmmBricksHtml = "";
+  if (m.tbmmBricks) {
+    const tbmmHtml = m.tbmmBricks.map((v,i) => 
+      `<div class="brick ${brickClass(v)}">B${i+1}<br>${v.toFixed(3)}</div>`
+    ).join("");
+    tbmmBricksHtml = `
+    <div class="section">
+      <h3>TBMM Brick Voltages (current)</h3>
+      <div class="brick-grid">${tbmmHtml}</div>
+    </div>`;
+  }
+  const panel = document.getElementById("panel");
+  panel.innerHTML = `
+    <div class="detail-header">
+      <div>
+        <h2 style="margin:0">Module ${id}</h2>
+        <span class="priority">${m.status}</span>
+      </div>
+      <button class="close-btn" onclick="closeDetail()">×</button>
+    </div>
+    <div class="section">
+      <h3>SMT Brick Voltages (snapshot)</h3>
+      <div class="brick-grid">${bricksHtml}</div>
+      <div class="kv"><span>SMT Spread</span><span>${m.smt} mV</span></div>
+    </div>
+    ${tbmmBricksHtml}
+    <div class="section">
+      <h3>TBMM Result</h3>
+      <div class="notes">${m.tbmm}</div>
+    </div>
+    <div class="section">
+      <h3>Sense Wires Repaired</h3>
+      <div class="notes">${m.wires}</div>
+    </div>
+    <div class="section">
+      <h3>Visual / BMB Inspection</h3>
+      <div class="notes">${m.visual}</div>
+    </div>
+    <div class="section">
+      <h3>Notes</h3>
+      <div class="notes">${m.notes}</div>
+    </div>
+  `;
+  document.getElementById("overlay").classList.add("show");
+}
+
+function closeDetail() {
+  document.getElementById("overlay").classList.remove("show");
+}
+
+document.querySelectorAll(".module-btn").forEach(btn => {
+  btn.addEventListener("click", () => showDetail(btn.dataset.mod));
+});
+
+document.getElementById("overlay").addEventListener("click", (e) => {
+  if (e.target.id === "overlay") closeDetail();
+});
+</script>
+</body>
+</html>
