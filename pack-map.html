@@ -132,7 +132,7 @@
   <div class="front-label">FRONT OF CAR ↑</div>
   <div class="front-stacks">
     <button class="module-btn confirmed stack" data-mod="9">M9<br><span class="status">CONFIRMED · Top Stack</span></button>
-    <button class="module-btn confirmed stack" data-mod="8">M8<br><span class="status">CONFIRMED · Bottom Stack</span></button>
+    <button class="module-btn green confirmed stack" data-mod="8">M8<br><span class="status">CONFIRMED · Bottom Stack</span></button>
   </div>
   <div class="side-rows">
     <!-- Left row: front to rear M7→M1 -->
@@ -143,7 +143,7 @@
       <button class="module-btn green" data-mod="4">M4<br><span class="status">HEALTHY</span></button>
       <button class="module-btn orange" data-mod="3">M3<br><span class="status">SECOND</span></button>
       <button class="module-btn green" data-mod="2">M2<br><span class="status">HEALTHY</span></button>
-      <button class="module-btn green confirmed" data-mod="1">M1<br><span class="status">CONFIRMED</span></button>
+      <button class="module-btn orange" data-mod="1">M1<br><span class="status">SECOND</span></button>
     </div>
     <!-- Right row: front to rear M10→M16 -->
     <div style="display:flex;flex-direction:column;gap:6px;">
@@ -165,14 +165,14 @@
 
 <script>
 const data = {
-  1: { status:"CONFIRMED", color:"green", bricks:[3.759,3.759,3.718,3.799,3.759,3.759], tbmmBricks:[3.747,3.750,3.751,3.751,3.750,3.749], smt:2, tbmm:"4 mV PASS", wires:"Repaired — now good", visual:"PASS (thumbs-up)", notes:"TBMM (Oct 27): 22.50 V, bricks 3.747/3.750/3.751/3.751/3.750/3.749 V, 4 mV PASS, 14.5/14.3 °C, thumbs-up. Variance 21.2 min (113 readings): Hi=47 mV (M1 C3), 4 cells >5 mV. Repaired — confirmed good to go." },
+  1: { status:"SECOND", color:"orange", bricks:[3.759,3.759,3.718,3.799,3.759,3.759], smt:2, tbmm:"PENDING", wires:"Not inspected", visual:"Pending", notes:"Mild B3/B4 pair. Expected healthy on TBMM." },
   2: { status:"HEALTHY", color:"green", bricks:[3.761,3.764,3.761,3.763,3.761,3.762], smt:2, tbmm:"PENDING (SMT healthy)", wires:"Not inspected", visual:"Pending", notes:"Tight/healthy SMT (2 mV). Expected PASS on TBMM." },
   3: { status:"SECOND", color:"orange", bricks:[3.766,3.767,3.741,3.793,3.766,3.766], smt:3, tbmm:"PENDING", wires:"Not inspected", visual:"Pending", notes:"Mild B3/B4 pair. Expected healthy." },
   4: { status:"HEALTHY", color:"green", bricks:[3.766,3.767,3.765,3.767,3.766,3.766], smt:3, tbmm:"PENDING (SMT healthy)", wires:"Not inspected", visual:"Pending", notes:"Tight/healthy SMT (3 mV)." },
   5: { status:"HEALTHY", color:"green", bricks:[3.765,3.766,3.764,3.765,3.764,3.765], smt:2, tbmm:"PENDING (SMT healthy)", wires:"Not inspected", visual:"Pending", notes:"Tight/healthy SMT (2 mV)." },
   6: { status:"OPEN FIRST", color:"red", bricks:[3.764,3.764,3.717,3.810,3.671,3.857], smt:186, tbmm:"PENDING", wires:"Not yet checked", visual:"Priority remaining", notes:"PENDING - SMT 186 mV high priority. B5-low / B6-high pattern (possible BMB caps or sense wire). Next to test after Module 7." },
   7: { status:"OPEN FIRST", color:"red", bricks:[3.764,3.765,3.622,3.698,3.775,3.965], smt:346, tbmm:"77 mV FAIL (after repair)", wires:"Yellow / Orange / Green riveted", visual:"Continued troubleshooting", notes:"After yellow/orange/green rivets: ~22.51 V, ~3.715-3.792 V, 77 mV FAIL (improved from 148 mV); still thumbs-down. Pack min/max live here." },
-  8: { status:"CONFIRMED", color:"green", bricks:[3.763,3.763,3.726,3.800,3.762,3.763], smt:2, tbmm:"4 mV PASS", wires:"Orange / Green / Brown riveted", visual:"PASS (thumbs-up)", notes:"Post-repair (orange/green/brown riveted): ~22.50 V, cells ~3.75 V, 4 mV PASS, thumbs-up. Confirmed good." },
+  8: { status:"CONFIRMED", color:"green", bricks:[3.763,3.763,3.726,3.800,3.762,3.763], tbmmBricks:[3.747,3.750,3.751,3.751,3.750,3.749], smt:2, tbmm:"4 mV PASS", wires:"Orange / Green / Brown riveted", visual:"PASS (thumbs-up)", notes:"Post-repair (orange/green/brown riveted). TBMM (Oct 27): 22.50 V, bricks 3.747/3.750/3.751/3.751/3.750/3.749 V, 4 mV PASS, 14.5/14.3 °C, thumbs-up. Variance 21.2 min (113 readings): Hi=47 mV (C3), 4 cells >5 mV. Repaired — confirmed good to go." },
   9: { status:"CONFIRMED", color:"green", bricks:[3.767,3.767,3.723,3.811,3.673,3.862], smt:190, tbmm:"5 mV PASS (after repair)", wires:"Green / Brown / Orange riveted (were detached)", visual:"Heavy terminal/busbar corrosion noted (visual)", notes:"Post-repair (green/brown/orange riveted): 22.53 V, cells 3.751-3.756 V, 5 mV PASS, thumbs-up; was 183 mV FAIL. Confirmed good." },
   10:{ status:"OPEN FIRST", color:"red", bricks:[3.786,3.745,3.763,3.765,3.685,3.844], smt:150, tbmm:"PENDING", wires:"Not inspected", visual:"Pending", notes:"B5-low / B6-high pattern. Medium priority. Possible BMB or sense issue." },
   11:{ status:"OPEN FIRST", color:"red", bricks:[3.764,3.765,3.764,3.764,3.679,3.849], smt:150, tbmm:"PENDING", wires:"Not inspected", visual:"Pending", notes:"B5-low / B6-high pattern. Medium priority." },
