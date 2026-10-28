@@ -143,7 +143,7 @@
       <button class="module-btn green" data-mod="4">M4<br><span class="status">HEALTHY</span></button>
       <button class="module-btn orange" data-mod="3">M3<br><span class="status">SECOND</span></button>
       <button class="module-btn green" data-mod="2">M2<br><span class="status">HEALTHY</span></button>
-      <button class="module-btn orange" data-mod="1">M1<br><span class="status">SECOND</span></button>
+      <button class="module-btn green confirmed" data-mod="1">M1<br><span class="status">CONFIRMED</span></button>
     </div>
     <!-- Right row: front to rear M10→M16 -->
     <div style="display:flex;flex-direction:column;gap:6px;">
@@ -165,7 +165,7 @@
 
 <script>
 const data = {
-  1: { status:"SECOND", color:"orange", bricks:[3.759,3.759,3.718,3.799,3.759,3.759], smt:2, tbmm:"PENDING", wires:"Not inspected", visual:"Pending", notes:"Mild B3/B4 pair. Expected healthy on TBMM." },
+  1: { status:"CONFIRMED", color:"green", bricks:[3.759,3.759,3.718,3.799,3.759,3.759], tbmmBricks:[3.747,3.750,3.751,3.751,3.750,3.749], smt:2, tbmm:"4 mV PASS", wires:"Repaired — now good", visual:"PASS (thumbs-up)", notes:"TBMM (Oct 27): 22.50 V, bricks 3.747/3.750/3.751/3.751/3.750/3.749 V, 4 mV PASS, 14.5/14.3 °C, thumbs-up. Variance 21.2 min (113 readings): Hi=47 mV (M1 C3), 4 cells >5 mV. Repaired — confirmed good to go." },
   2: { status:"HEALTHY", color:"green", bricks:[3.761,3.764,3.761,3.763,3.761,3.762], smt:2, tbmm:"PENDING (SMT healthy)", wires:"Not inspected", visual:"Pending", notes:"Tight/healthy SMT (2 mV). Expected PASS on TBMM." },
   3: { status:"SECOND", color:"orange", bricks:[3.766,3.767,3.741,3.793,3.766,3.766], smt:3, tbmm:"PENDING", wires:"Not inspected", visual:"Pending", notes:"Mild B3/B4 pair. Expected healthy." },
   4: { status:"HEALTHY", color:"green", bricks:[3.766,3.767,3.765,3.767,3.766,3.766], smt:3, tbmm:"PENDING (SMT healthy)", wires:"Not inspected", visual:"Pending", notes:"Tight/healthy SMT (3 mV)." },
