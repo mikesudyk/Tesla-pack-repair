@@ -78,6 +78,18 @@
     border-radius: 4px;
     font-weight: 700;
   }
+  .module-btn.reinstalled::before {
+    content: "REINSTALLED";
+    position: absolute;
+    bottom: 2px;
+    left: 3px;
+    font-size: 0.5rem;
+    background: var(--blue);
+    color: #0d1117;
+    padding: 1px 3px;
+    border-radius: 4px;
+    font-weight: 700;
+  }
   .module-btn .num { font-size: 1.05rem; color: #ffffff; }
   .module-btn .status { font-size: 0.65rem; color: #c9d1d9; margin-top: 2px; }
   .stack { width: 140px; }
@@ -123,6 +135,7 @@
 
 <div class="legend">
   <span><i class="dot" style="background:var(--green)"></i> Confirmed Good (✓ GOOD)</span>
+  <span><i class="dot" style="background:var(--blue)"></i> Reinstalled (LV + HV + coolant)</span>
   <span><i class="dot" style="background:var(--red)"></i> Open First / Needs Work</span>
   <span><i class="dot" style="background:var(--orange)"></i> Mild / Second</span>
   <span><i class="dot" style="background:var(--low)"></i> Low <~3.70V</span>
@@ -148,13 +161,13 @@
     </div>
     <!-- Right row: front to rear M10→M16 -->
     <div style="display:flex;flex-direction:column;gap:6px;">
-      <button class="module-btn green confirmed" data-mod="10">M10<br><span class="status">CONFIRMED · Reinstalled</span></button>
-      <button class="module-btn green confirmed" data-mod="11">M11<br><span class="status">CONFIRMED · Reinstalled</span></button>
-      <button class="module-btn confirmed" data-mod="12">M12<br><span class="status">CONFIRMED</span></button>
-      <button class="module-btn green confirmed" data-mod="13">M13<br><span class="status">CONFIRMED</span></button>
-      <button class="module-btn green confirmed" data-mod="14">M14<br><span class="status">CONFIRMED</span></button>
-      <button class="module-btn confirmed" data-mod="15">M15<br><span class="status">CONFIRMED</span></button>
-      <button class="module-btn green confirmed" data-mod="16">M16<br><span class="status">CONFIRMED</span></button>
+      <button class="module-btn green confirmed reinstalled" data-mod="10">M10<br><span class="status">CONFIRMED · Reinstalled</span></button>
+      <button class="module-btn green confirmed reinstalled" data-mod="11">M11<br><span class="status">CONFIRMED · Reinstalled</span></button>
+      <button class="module-btn confirmed reinstalled" data-mod="12">M12<br><span class="status">CONFIRMED · Reinstalled</span></button>
+      <button class="module-btn green confirmed reinstalled" data-mod="13">M13<br><span class="status">CONFIRMED · Reinstalled</span></button>
+      <button class="module-btn green confirmed reinstalled" data-mod="14">M14<br><span class="status">CONFIRMED · Reinstalled</span></button>
+      <button class="module-btn confirmed reinstalled" data-mod="15">M15<br><span class="status">CONFIRMED · Reinstalled</span></button>
+      <button class="module-btn green confirmed reinstalled" data-mod="16">M16<br><span class="status">CONFIRMED · Reinstalled</span></button>
     </div>
   </div>
   <div class="front-label" style="margin-top:8px;">REAR OF CAR</div>
@@ -175,13 +188,13 @@ const data = {
   7: { status:"CONFIRMED", color:"green", bricks:[3.764,3.765,3.622,3.698,3.775,3.965], tbmmBricks:[3.750,3.755,3.753,3.755,3.753,3.753], smt:346, tbmm:"5 mV PASS (new BMB from Kevin, Nov 12)", wires:"Yellow / Orange / Green riveted", visual:"New BMB from Kevin installed and confirmed good (Florida FB board was bad: 39 mV FAIL)", notes:"After yellow/orange/green rivets: ~22.51 V, 77 mV FAIL (improved from 148 mV). New BMB from Kevin (Nov 12): 22.52 V, bricks 3.750/3.755/3.753/3.755/3.753/3.753 V, H 3.755V / L 3.750V, 5 mV PASS, 8.1–8.3 °C. Confirmed good. Florida FB board tested bad (22.47 V, 39 mV FAIL, thumbs-down)." },
   8: { status:"CONFIRMED", color:"green", bricks:[3.763,3.763,3.726,3.800,3.762,3.763], smt:2, tbmm:"4 mV PASS", wires:"Orange / Green / Brown riveted", visual:"PASS (thumbs-up)", notes:"Post-repair (orange/green/brown riveted): ~22.50 V, cells ~3.75 V, 4 mV PASS, thumbs-up. Confirmed good." },
   9: { status:"CONFIRMED", color:"green", bricks:[3.767,3.767,3.723,3.811,3.673,3.862], smt:190, tbmm:"5 mV PASS (after repair)", wires:"Green / Brown / Orange riveted (were detached)", visual:"Heavy terminal/busbar corrosion noted (visual)", notes:"Post-repair (green/brown/orange riveted): 22.53 V, cells 3.751-3.756 V, 5 mV PASS, thumbs-up; was 183 mV FAIL. Confirmed good." },
-  10:{ status:"CONFIRMED", color:"green", bricks:[3.786,3.745,3.763,3.765,3.685,3.844], tbmmBricks:[3.750,3.753,3.750,3.753,3.753,3.752], smt:150, tbmm:"3 mV PASS (after repair)", wires:"Orange / Green / Brown riveted", visual:"BMB looks good; reinstalled", notes:"Post-repair (orange/green/brown riveted). TBMM (Oct 28): 22.51 V, bricks 3.750/3.753/3.750/3.753/3.753/3.752 V, 3 mV PASS, 14.9/14.7 °C. SMT was 150 mV (B5-low/B6-high) — sense-wire issue. Confirmed good to go and reinstalled." },
-  11:{ status:"CONFIRMED", color:"green", bricks:[3.764,3.765,3.764,3.764,3.679,3.849], tbmmBricks:[3.749,3.753,3.752,3.752,3.751,3.751], smt:150, tbmm:"4 mV PASS (after repair)", wires:"Orange / Green riveted", visual:"BMB looks good; reinstalled", notes:"Post-repair (orange/green riveted). TBMM (Oct 28): 22.51 V, bricks 3.749/3.753/3.752/3.752/3.751/3.751 V, 4 mV PASS, 14.5/14.6 °C. SMT was 150 mV (B5-low/B6-high) — sense-wire issue. Confirmed good to go and reinstalled." },
-  12:{ status:"CONFIRMED", color:"green", bricks:[3.764,3.764,3.723,3.804,3.763,3.764], smt:81, tbmm:"4 mV PASS", wires:"Bottom Orange riveted (now all good)", visual:"Looks good; white marks on connector plate bottom", notes:"Post-repair (orange sense wire riveted): 22.51 V, cells 3.749-3.753 V, 4 mV PASS, 15.0/14.9 °C, thumbs-up; SMT was 81 mV. Confirmed good." },
-  13:{ status:"CONFIRMED", color:"green", bricks:[3.765,3.765,3.764,3.765,3.765,3.765], tbmmBricks:[3.749,3.753,3.751,3.752,3.751,3.751], smt:2, tbmm:"4 mV PASS", wires:"All good (visual inspection complete)", visual:"All good — inspected", notes:"TBMM: 22.51 V, bricks 3.749/3.753/3.751/3.752/3.751/3.751 V, 4 mV PASS, 14.5–14.6 °C, thumbs-up. Variance max 1 mV (0 cells >5 mV). Visual inspection complete and good. Matches healthy SMT." },
-  14:{ status:"CONFIRMED", color:"green", bricks:[3.764,3.763,3.764,3.764,3.764,3.764], tbmmBricks:[3.748,3.751,3.751,3.751,3.751,3.750], smt:2, tbmm:"3–4 mV PASS", wires:"All good (no repairs needed)", visual:"Visual inspection confirmed good", notes:"TBMM: 22.50 V, bricks 3.748/3.751/3.751/3.751/3.751/3.750 V, 3–4 mV PASS, 14.5 °C, thumbs-up. Variance max 1 mV (0 cells >5 mV). Visual inspection confirmed good. Matches healthy SMT." },
-  15:{ status:"CONFIRMED", color:"green", bricks:[3.763,3.763,3.763,3.763,3.763,3.763], smt:1, tbmm:"3–4 mV PASS", wires:"All good (top: red/yellow/blue/black; bottom: orange/green/brown)", visual:"PASS", notes:"TBMM: 22.50 V, cells 3.747-3.751 V, 3-4 mV PASS, 13.5-13.7 °C; matches low SMT. All sensor wires explicitly inspected/good. Confirmed good." },
-  16:{ status:"CONFIRMED", color:"green", bricks:[3.765,3.765,3.722,3.807,3.691,3.842], tbmmBricks:[3.750,3.753,3.752,3.753,3.752,3.755], smt:150, tbmm:"5 mV PASS (after repair)", wires:"Orange & Green (bottom) repaired — now all good", visual:"Detached sense wires fixed; now PASS", notes:"Before: 22.52 V, bricks 3.749/3.753/3.711/3.795/3.680/3.828 V, 148 mV FAIL. After green+orange sense-wire repair: 22.51–22.52 V, bricks tightly 3.750–3.755 V (1:3.750, 2:3.753, 3:3.752, 4:3.753, 5:3.752, 6:3.755), 5 mV PASS, 14.7 °C, thumbs-up. Confirmed sense-wire issue, not cells." }
+  10:{ status:"CONFIRMED · REINSTALLED", color:"green", bricks:[3.786,3.745,3.763,3.765,3.685,3.844], tbmmBricks:[3.750,3.753,3.750,3.753,3.753,3.752], smt:150, tbmm:"3 mV PASS (after repair)", wires:"Orange / Green / Brown riveted", visual:"BMB looks good; reinstalled", notes:"Post-repair (orange/green/brown riveted). TBMM (Oct 28): 22.51 V, bricks 3.750/3.753/3.750/3.753/3.753/3.752 V, 3 mV PASS, 14.9/14.7 °C. SMT was 150 mV (B5-low/B6-high) — sense-wire issue. Confirmed good to go and reinstalled (LV + HV connectors + coolant lines connected)." },
+  11:{ status:"CONFIRMED · REINSTALLED", color:"green", bricks:[3.764,3.765,3.764,3.764,3.679,3.849], tbmmBricks:[3.749,3.753,3.752,3.752,3.751,3.751], smt:150, tbmm:"4 mV PASS (after repair)", wires:"Orange / Green riveted", visual:"BMB looks good; reinstalled", notes:"Post-repair (orange/green riveted). TBMM (Oct 28): 22.51 V, bricks 3.749/3.753/3.752/3.752/3.751/3.751 V, 4 mV PASS, 14.5/14.6 °C. SMT was 150 mV (B5-low/B6-high) — sense-wire issue. Confirmed good to go and reinstalled (LV + HV connectors + coolant lines connected)." },
+  12:{ status:"CONFIRMED · REINSTALLED", color:"green", bricks:[3.764,3.764,3.723,3.804,3.763,3.764], smt:81, tbmm:"4 mV PASS", wires:"Bottom Orange riveted (now all good)", visual:"Looks good; white marks on connector plate bottom", notes:"Post-repair (orange sense wire riveted): 22.51 V, cells 3.749-3.753 V, 4 mV PASS, 15.0/14.9 °C, thumbs-up; SMT was 81 mV. Confirmed good. Reinstalled (LV + HV connectors + coolant lines connected)." },
+  13:{ status:"CONFIRMED · REINSTALLED", color:"green", bricks:[3.765,3.765,3.764,3.765,3.765,3.765], tbmmBricks:[3.749,3.753,3.751,3.752,3.751,3.751], smt:2, tbmm:"4 mV PASS", wires:"All good (visual inspection complete)", visual:"All good — inspected", notes:"TBMM: 22.51 V, bricks 3.749/3.753/3.751/3.752/3.751/3.751 V, 4 mV PASS, 14.5–14.6 °C, thumbs-up. Variance max 1 mV (0 cells >5 mV). Visual inspection complete and good. Matches healthy SMT. Reinstalled (LV + HV connectors + coolant lines connected)." },
+  14:{ status:"CONFIRMED · REINSTALLED", color:"green", bricks:[3.764,3.763,3.764,3.764,3.764,3.764], tbmmBricks:[3.748,3.751,3.751,3.751,3.751,3.750], smt:2, tbmm:"3–4 mV PASS", wires:"All good (no repairs needed)", visual:"Visual inspection confirmed good", notes:"TBMM: 22.50 V, bricks 3.748/3.751/3.751/3.751/3.751/3.750 V, 3–4 mV PASS, 14.5 °C, thumbs-up. Variance max 1 mV (0 cells >5 mV). Visual inspection confirmed good. Matches healthy SMT. Reinstalled (LV + HV connectors + coolant lines connected)." },
+  15:{ status:"CONFIRMED · REINSTALLED", color:"green", bricks:[3.763,3.763,3.763,3.763,3.763,3.763], smt:1, tbmm:"3–4 mV PASS", wires:"All good (top: red/yellow/blue/black; bottom: orange/green/brown)", visual:"PASS", notes:"TBMM: 22.50 V, cells 3.747-3.751 V, 3-4 mV PASS, 13.5-13.7 °C; matches low SMT. All sensor wires explicitly inspected/good. Confirmed good. Reinstalled (LV + HV connectors + coolant lines connected)." },
+  16:{ status:"CONFIRMED · REINSTALLED", color:"green", bricks:[3.765,3.765,3.722,3.807,3.691,3.842], tbmmBricks:[3.750,3.753,3.752,3.753,3.752,3.755], smt:150, tbmm:"5 mV PASS (after repair)", wires:"Orange & Green (bottom) repaired — now all good", visual:"Detached sense wires fixed; now PASS", notes:"Before: 22.52 V, bricks 3.749/3.753/3.711/3.795/3.680/3.828 V, 148 mV FAIL. After green+orange sense-wire repair: 22.51–22.52 V, bricks tightly 3.750–3.755 V (1:3.750, 2:3.753, 3:3.752, 4:3.753, 5:3.752, 6:3.755), 5 mV PASS, 14.7 °C, thumbs-up. Confirmed sense-wire issue, not cells. Reinstalled (LV + HV connectors + coolant lines connected)." }
 };
 
 function brickClass(v) {
