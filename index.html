@@ -435,20 +435,137 @@ footer { text-align: center; color: var(--muted); font-size: 0.75rem; margin-top
             <span class="wire-box wire-yellow"></span><span class="wire-status pending">—</span>
             <span class="wire-box wire-blue"></span><span class="wire-status pending">—</span>
             <span class="wire-box wire-black"></span><span class="wire-status pending">—</span>
-            <span class="wire-box wire-orange"></span><span class="wire-status pending">—</span>
-            <span class="wire-box wire-green"></span><span class="wire-status pending">—</span>
+            <span class="wire-box wire-orange"></span><span class="wire-status fail">F</span>
+            <span class="wire-box wire-green"></span><span class="wire-status fail">F</span>
             <span class="wire-box wire-brown"></span><span class="wire-status pending">—</span>
           </td>
           <td class="wire-cell"><span class="bms-box"></span><span class="wire-status pending">—</span></td>
-          <td>Green + orange sense wires riveted. TBMM after: 5 mV PASS.</td>
+          <td>Green and orange sense wires repaired (riveted). Post-repair TBMM 5 mV PASS.</td>
         </tr>
-        <!-- More rows truncated in this example for brevity; full content is in the file -->
       </tbody>
     </table>
     </div>
   </div>
 </div>
 
-<!-- The rest of the file continues with faults, explanations, timeline, pages, and script sections unchanged from the original -->
+<!-- FAULTS -->
+<div id="faults" class="section">
+  <div class="card">
+    <h2>Active / Recent Faults</h2>
+    <table>
+      <tr><th>Code</th><th>Description</th><th>Status</th></tr>
+      <tr><td>BMS_f107</td><td>Voltage sense harness open / bad reading</td><td class="issue">Active</td></tr>
+      <tr><td>BMS_a129</td><td>Brick voltage imbalance</td><td class="issue">Active</td></tr>
+      <tr><td>BMS_w107</td><td>Related voltage sense warning</td><td class="issue">Active</td></tr>
+      <tr><td>BMS_f177</td><td>Open voltage-sense harness</td><td class="pending">—</td></tr>
+    </table>
+  </div>
+  <div class="card">
+    <h2>Pyro Fuse / Water Ingress</h2>
+    <p>Water confirmed in pyro fuse cavity. Cover P/N 1020227-00-C (gasket failure) is the source of the f107/w107 and likely contributed to sense-wire issues.</p>
+    <p>Pyro fuse TPN 1053124-00-A / TSN T15E0022094.</p>
+  </div>
+</div>
+
+<!-- EXPLANATIONS -->
+<div id="explanations" class="section">
+  <div class="card">
+    <h2>Why SMT Spreads Were High</h2>
+    <p>Most high SMT spreads (e.g. Module 12 at 81 mV, Module 16 at 150 mV) were caused by detached or high-resistance sense wires, not actual cell imbalance. TBMM (with good connections) showed true low imbalance (3–5 mV) after riveting the loose wires.</p>
+  </div>
+  <div class="card">
+    <h2>Sense Wire Repair Guide (Riveting Method)</h2>
+    <p>For detached sense wires (e.g. Module 16 orange/green, Module 9 green/brown/orange):</p>
+    <ol>
+      <li>Clean the tab and wire end.</li>
+      <li>Use a small rivet or crimp to reattach.</li>
+      <li>Tug-test the connection.</li>
+      <li>Retest with TBMM.</li>
+    </ol>
+    <p>Colored boxes in the inspection table match the physical wire colors (top: red/yellow/blue/black; bottom: orange/green/brown).</p>
+  </div>
+</div>
+
+<!-- TIMELINE -->
+<div id="timeline" class="section">
+  <div class="card">
+    <h2>Repair Timeline</h2>
+    <div class="timeline-item"><strong>June 2026</strong> — SMT baseline: pack 361 V, imbalance 344–348 mV, CAC 208–211 Ah. Faults BMS_f107, BMS_a129.</div>
+    <div class="timeline-item"><strong>Oct 2026</strong> — Pack dropped (Vevor jack method), opened. Water in pyro fuse cavity confirmed. Modules 12, 14, 15 TBMM PASS. Module 16 FAIL then repaired (green+orange rivets) to 5 mV PASS. Modules 8, 9 sense-wire repairs to PASS. Module 7 improved but still FAIL.</div>
+    <div class="timeline-item"><strong>Nov 2 2026</strong> — Module 6: original BMB bad (93 mV); swapped known-good from Module 8 → 4 mV PASS. Cells healthy. Modules 10 & 11 reinstalled after rivets (3–4 mV PASS).</div>
+    <div class="timeline-item"><strong>Nov 3 2026</strong> — To-Do updated. Priority: check M1-5, BMB for M6/M7, sealant, coolant, pyro cover.</div>
+    <div class="timeline-item"><strong>Nov 10 2026</strong> — Module 6 new BMB installed and retested: 22.50 V, bricks 3.748–3.753 V, 4–5 mV PASS, 11.0–11.1 °C. Confirmed good.</div>
+    <div class="timeline-item"><strong>Nov 12 2026</strong> — Module 7 new BMB (from Kevin) installed and retested: 22.52 V, bricks 3.750/3.755/3.753/3.755/3.753/3.753 V, 5 mV PASS, 8.1–8.3 °C. Confirmed good. Florida FB board tested bad (39 mV FAIL, thumbs-down).</div>
+  </div>
+</div>
+
+<!-- PAGES -->
+<div id="pages" class="section">
+  <div class="card">
+    <h2>Related Pages</h2>
+    <div class="pages-grid">
+      <a class="page-card" href="pack-map.html">
+        <h3>Interactive Pack Map</h3>
+        <p>Top-down BMS numbering. Tap modules for SMT vs TBMM bricks, sense-wire status, and notes.</p>
+        <span class="url">pack-map.html</span>
+      </a>
+      <a class="page-card" href="ev-school.html">
+        <h3>EV School</h3>
+        <p>Lessons for ages 5–15: battery basics, series/parallel. Linked from main log.</p>
+        <span class="url">ev-school.html</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  Central data log for 2015 Model S 85D (5YJSA1H25FF091116) pack repair • Mike Sudyk<br>
+  Data from SMT June 2026, Toolbox, TBMM Oct–Nov 2026. Ready for 85Dlog.5udyk.com
+</footer>
+
+<script>
+const modules = [
+  {id:1, low:3.763, high:3.764, spread:1, flag:'flat'},
+  {id:2, low:3.763, high:3.764, spread:1, flag:'flat'},
+  {id:3, low:3.763, high:3.764, spread:1, flag:'flat'},
+  {id:4, low:3.763, high:3.764, spread:1, flag:'flat'},
+  {id:5, low:3.763, high:3.764, spread:1, flag:'flat'},
+  {id:6, low:3.622, high:3.808, spread:186, flag:'high'},
+  {id:7, low:3.622, high:3.968, spread:346, flag:'high'},
+  {id:8, low:3.763, high:3.765, spread:2, flag:'flat'},
+  {id:9, low:3.622, high:3.812, spread:190, flag:'high'},
+  {id:10, low:3.622, high:3.772, spread:150, flag:'high'},
+  {id:11, low:3.622, high:3.772, spread:150, flag:'high'},
+  {id:12, low:3.622, high:3.703, spread:81, flag:'low'},
+  {id:13, low:3.763, high:3.764, spread:1, flag:'flat'},
+  {id:14, low:3.763, high:3.765, spread:2, flag:'flat'},
+  {id:15, low:3.763, high:3.764, spread:1, flag:'flat'},
+  {id:16, low:3.622, high:3.772, spread:150, flag:'high'}
+];
+
+function renderModules() {
+  const grid = document.getElementById('moduleGrid');
+  const tbody = document.querySelector('#moduleTable tbody');
+  modules.forEach(m => {
+    const cell = document.createElement('div');
+    cell.className = 'module-cell ' + m.flag;
+    cell.textContent = 'M' + m.id + '\n' + m.spread + ' mV';
+    grid.appendChild(cell);
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td>${m.id}</td><td>${m.low}</td><td>${m.high}</td><td>${m.spread}</td><td class="flag-${m.flag}">${m.flag}</td>`;
+    tbody.appendChild(tr);
+  });
+}
+renderModules();
+
+document.querySelectorAll('nav button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(btn.dataset.tab).classList.add('active');
+  });
+});
+</script>
 </body>
 </html>
