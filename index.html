@@ -261,18 +261,18 @@ footer { text-align: center; color: var(--muted); font-size: 0.75rem; margin-top
   <div class="card">
     <h2>Quick Stats</h2>
     <div class="stats">
-      <div class="stat"><div class="value">11/16</div><div class="label">Modules Tested</div></div>
+      <div class="stat"><div class="value">12/16</div><div class="label">Modules Tested</div></div>
       <div class="stat"><div class="value">4</div><div class="label">Active Faults</div></div>
       <div class="stat"><div class="value">346 mV</div><div class="label">Max SMT Spread</div></div>
     </div>
   </div>
   <div class="card">
     <h2>Current Status</h2>
-    <p>Pack dropped and opened in garage. Water confirmed in pyro fuse cavity. Modules tested with TBMM for voltage variance and sensor wires repaired and confirmed TBMM PASS on all modules marked “confirmed”. Module 6 and Module 7 both confirmed good with new BMBs (Nov 10 & Nov 12).</p>
+    <p>Pack dropped and opened in garage. Water confirmed in pyro fuse cavity. Modules tested with TBMM for voltage variance and sensor wires repaired and confirmed TBMM PASS on all modules marked “confirmed”. Module 6 and Module 7 both confirmed good with new BMBs (Nov 10 & Nov 12). Module 5 inspected, confirmed 4–5 mV PASS, and reinstalled (Nov 20).</p>
     <div class="highlight">
-      <strong>Priority next:</strong> Pull out and check modules 1–5. Finish reinstall of modules 8 & 9. Check umbrella valves, remove old sealant, install pyro fuse cover, and verify coolant lines.
+      <strong>Priority next:</strong> Pull out and check modules 1–4. Finish reinstall of modules 8 & 9. Check umbrella valves, remove old sealant, install pyro fuse cover, and verify coolant lines.
     </div>
-    <div class="progress"><div class="progress-bar" style="width:69%">11/16</div></div>
+    <div class="progress"><div class="progress-bar" style="width:75%">12/16</div></div>
   </div>
   <div class="card">
     <h2>Interactive Pack Map</h2>
@@ -283,7 +283,7 @@ footer { text-align: center; color: var(--muted); font-size: 0.75rem; margin-top
   <div class="card">
     <h2>To-Do List</h2>
     <ul>
-      <li>Pull out and Check modules 1–5</li>
+      <li>Pull out and Check modules 1–4</li>
       <li>Check umbrella valves</li>
       <li>Finish Reinstall modules 8 & 9</li>
       <li>Remove all old sealant</li>
@@ -335,8 +335,8 @@ footer { text-align: center; color: var(--muted); font-size: 0.75rem; margin-top
 <!-- TBMM -->
 <div id="tbmm" class="section">
   <div class="card">
-    <h2>TBMM Progress — 11 of 16</h2>
-    <div class="progress"><div class="progress-bar" style="width:50%">8/16</div></div>
+    <h2>TBMM Progress — 12 of 16</h2>
+    <div class="progress"><div class="progress-bar" style="width:75%">12/16</div></div>
     <div class="highlight">
       <strong>Module 12:</strong> SMT 81 mV → TBMM 4 mV <span class="pass">PASS</span> (connector issue). Post-rivet (orange sense wire): 22.51 V • cells 3.749–3.753 V • 4 mV imbalance • 15.0/14.9 °C • thumbs-up. Variance over 6.2 min (158 readings): Hi=268 mV (M1 C3), 2 cells >5 mV. Physical: looks good; all sensor wires good after orange rivet; white marks on connector plate bottom.<br>
       <strong>Module 9:</strong> Initial TBMM FAIL 183 mV (detached green/brown/orange sense wires). After riveting: 22.53 V • cells 3.751–3.756 V • 5 mV imbalance • 15.2/15.1 °C • thumbs-up <span class="pass">PASS</span>. Variance max 1 mV. Heavy corrosion on terminals/busbars (visual). Sense-wire repair resolved the imbalance.<br>
@@ -348,7 +348,8 @@ footer { text-align: center; color: var(--muted); font-size: 0.75rem; margin-top
       <strong>Module 15:</strong> 22.50 V • cell groups 3.747–3.751 V • imbalance 3–4 mV • temps 13.5–13.7 °C • variance max 1 mV • <span class="pass">PASS</span>. All sensor wires good (top: red/yellow/blue/black; bottom: orange/green/brown).<br>
       <strong>Module 16:</strong> Before: 22.52 V, bricks 3.749/3.753/3.711/3.795/3.680/3.828 V, <span class="fail">148 mV FAIL</span>. After green+orange repair: 22.51–22.52 V, bricks 3.750/3.753/3.752/3.753/3.752/3.755 V, <span class="pass">5 mV PASS</span>, 14.7 °C, thumbs-up. Sense-wire issue confirmed.<br>
       <strong>Module 6:</strong> After orange/green sense-wire rivets still <span class="fail">93 mV FAIL</span> on original BMB (B3 3.706V low / B4 3.799V high). Swapped known-good BMB from Module 8 → 22.51 V, bricks 3.750/3.753/3.752/3.754/3.753/3.752 V, <span class="pass">4 mV PASS</span>, ~17.3–17.6 °C. Cells confirmed healthy; original BMB was the source of the bad reading. (Nov 2)<br>
-      <strong>Module 6 (new BMB, Nov 10):</strong> New BMB installed and retested → 22.50 V, bricks 3.748/3.751/3.751/3.753/3.751/3.750 V, H 3.752 V / L 3.748 V, <span class="pass">4–5 mV PASS</span>, 11.0–11.1 °C. Confirmed good.
+      <strong>Module 6 (new BMB, Nov 10):</strong> New BMB installed and retested → 22.50 V, bricks 3.748/3.751/3.751/3.753/3.751/3.750 V, H 3.752 V / L 3.748 V, <span class="pass">4–5 mV PASS</span>, 11.0–11.1 °C. Confirmed good.<br>
+      <strong>Module 5:</strong> Inspected and reinstalled (Nov 20). 22.50 V • bricks 3.747/3.752/3.750/3.751/3.750/3.750 V • H 3.752 V / L 3.747 V • <span class="pass">4–5 mV PASS</span> • 9.8/9.7 °C. Variance (30 sec, 7 readings): max 1 mV (0 cells &gt;5 mV). Confirmed good and reinstalled (LV + HV connectors and coolant lines connected).
     </div>
   </div>
   <div class="card">
@@ -361,13 +362,15 @@ footer { text-align: center; color: var(--muted); font-size: 0.75rem; margin-top
         <tr><td>9</td><td>190</td><td>5</td><td class="pass">PASS</td><td>Sense wires detached → fixed by rivet; corrosion visual only</td></tr>
         <tr><td>14</td><td>2</td><td>3–4</td><td class="pass">PASS</td><td>Healthy — matches low SMT</td></tr>
         <tr><td>15</td><td>1</td><td>3–4</td><td class="pass">PASS</td><td>Healthy — matches low SMT</td></tr>
-        <tr><td>16</td><td>150</td><td class="fail">146</td><td class="fail">FAIL</td><td>Real imbalance — detached sense wires</td></tr>
+        <tr><td>16</td><td>150</td><td>5</td><td class="pass">PASS</td><td>Was 148 mV FAIL (detached sense wires). After green+orange repair: 5 mV PASS. Confirmed and reinstalled.</td></tr>
         <tr><td>7</td><td class="flag-high">346</td><td>5</td><td class="pass">PASS</td><td>Was 77 mV FAIL after sense-wire rivets. New BMB from Kevin (Nov 12): 22.52 V, 5 mV PASS. Confirmed good. (Florida FB board tested bad: 39 mV FAIL.)</td></tr>
         <tr><td>8</td><td>2</td><td>4</td><td class="pass">PASS</td><td>Orange/green/brown riveted; clean 4 mV</td></tr>
         <tr><td>6</td><td class="flag-high">186</td><td>4–5</td><td class="pass">PASS</td><td>Original BMB bad; swapped known-good then new BMB installed. New BMB (Nov 10): 22.50 V, 4–5 mV PASS. Confirmed good.</td></tr>
-        <tr><td>10</td><td>150</td><td class="pending">PENDING</td><td>—</td><td>Medium</td></tr>
-        <tr><td>11</td><td>150</td><td class="pending">PENDING</td><td>—</td><td>Medium</td></tr>
-        <tr><td>1–5,8,13</td><td>1–3</td><td class="pending">PENDING</td><td>—</td><td>Expected PASS</td></tr>
+        <tr><td>10</td><td>150</td><td>3</td><td class="pass">PASS</td><td>Orange/green/brown riveted. TBMM 22.51 V, 3 mV PASS. Confirmed and reinstalled.</td></tr>
+        <tr><td>11</td><td>150</td><td>4</td><td class="pass">PASS</td><td>Orange/green riveted. TBMM 22.51 V, 4 mV PASS. Confirmed and reinstalled.</td></tr>
+        <tr><td>13</td><td>2</td><td>4</td><td class="pass">PASS</td><td>Healthy — matches low SMT. TBMM 22.51 V, 4 mV PASS. Confirmed and reinstalled.</td></tr>
+        <tr><td>5</td><td>2</td><td>4–5</td><td class="pass">PASS</td><td>TBMM (Nov 20): 22.50 V, bricks 3.747–3.752 V, 4–5 mV PASS, 9.8/9.7 °C. Variance max 1 mV. Confirmed and reinstalled.</td></tr>
+        <tr><td>1–4</td><td>1–3</td><td class="pending">PENDING</td><td>—</td><td>Expected PASS</td></tr>
       </tbody>
     </table>
     </div>
@@ -496,6 +499,7 @@ footer { text-align: center; color: var(--muted); font-size: 0.75rem; margin-top
     <div class="timeline-item"><strong>Nov 3 2026</strong> — To-Do updated. Priority: check M1-5, BMB for M6/M7, sealant, coolant, pyro cover.</div>
     <div class="timeline-item"><strong>Nov 10 2026</strong> — Module 6 new BMB installed and retested: 22.50 V, bricks 3.748–3.753 V, 4–5 mV PASS, 11.0–11.1 °C. Confirmed good.</div>
     <div class="timeline-item"><strong>Nov 12 2026</strong> — Module 7 new BMB (from Kevin) installed and retested: 22.52 V, bricks 3.750/3.755/3.753/3.755/3.753/3.753 V, 5 mV PASS, 8.1–8.3 °C. Confirmed good. Florida FB board tested bad (39 mV FAIL, thumbs-down).</div>
+    <div class="timeline-item"><strong>Nov 20 2026</strong> — Module 5 inspected: 22.50 V, bricks 3.747/3.752/3.750/3.751/3.750/3.750 V, 4–5 mV PASS, 9.8/9.7 °C. Variance (30 sec, 7 readings): max 1 mV (0 cells &gt;5 mV). Confirmed good and reinstalled (LV + HV connectors and coolant lines connected).</div>
   </div>
 </div>
 
