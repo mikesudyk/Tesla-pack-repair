@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SMT-Style Brick View — 2015 Model S 85D</title>
+<style>
+:root {
+  --bg: #0d1117;
+  --card: #161b22;
+  --text: #e6edf3;
+  --muted: #8b949e;
+  --border: #30363d;
+  --low: #1a1208;
+  --mid: #3d2f14;
+  --high: #5c4a1a;
+  --tbmm: #1a2e22;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  padding: 12px;
+}
+h1 { font-size: 1.3rem; margin: 0 0 4px; }
+.subtitle { color: var(--muted); font-size: 0.85rem; margin-bottom: 16px; }
+.legend { display: flex; gap: 12px; font-size: 0.75rem; margin-bottom: 12px; flex-wrap: wrap; }
+.legend span { display: flex; align-items: center; gap: 4px; }
+.dot { width: 12px; height: 12px; border-radius: 2px; }
+.module {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+.module-header {
+  background: #21262d;
+  padding: 8px 12px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.module-header .status { font-size: 0.7rem; font-weight: 500; color: var(--muted); }
+.bricks {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 2px;
+  padding: 4px;
+}
+.brick {
+  text-align: center;
+  padding: 10px 2px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  border-radius: 2px;
+  min-height: 42px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.brick .label { font-size: 0.6rem; opacity: 0.7; }
+.brick.smt-low { background: #1f1408; color: #e6c07b; }
+.brick.smt-mid { background: #3d2f14; color: #f0d9a0; }
+.brick.smt-high { background: #5c4518; color: #ffe4b5; }
+.brick.tbmm { background: #1a2e22; color: #b3e6c8; }
+.brick.missing { background: #21262d; color: #484f58; }
+.section-title {
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin: 4px 8px 2px;
+  font-weight: 500;
+}
+.note { font-size: 0.7rem; color: var(--muted); padding: 4px 12px 8px; }
+a.back { color: #58a6ff; text-decoration: none; font-size: 0.85rem; }
+</style>
+</head>
+<body>
+<a class="back" href="index.html">← Back to Repair Log</a>
+<h1>SMT-Style Brick Voltage View</h1>
+<p class="subtitle">All modules · SMT snapshot + TBMM where measured · Updated Nov 2026</p>
+
+<div class="legend">
+  <span><i class="dot" style="background:#3d2f14"></i> SMT (color by voltage)</span>
+  <span><i class="dot" style="background:#1a2e22"></i> TBMM measured</span>
+  <span><i class="dot" style="background:#21262d"></i> TBMM not yet exact</span>
+</div>
+
+<div id="modules"></div>
+
+<script>
+const modules = {
+  1: { smt: [3.759,3.759,3.718,3.799,3.759,3.759], tbmm: [3.743,3.747,3.746,3.747,3.745,3.745], status: "CONFIRMED · REINSTALLED", note: "Orange sense wire repaired. 4 mV PASS." },
+  2: { smt: [3.761,3.764,3.761,3.763,3.761,3.762], tbmm: [3.745,3.751,3.748,3.751,3.747,3.748], status: "ORANGE WIRE REPAIR", note: "Prior 6 mV. Orange wire bad — repair in progress." },
+  3: { smt: [3.766,3.767,3.741,3.793,3.766,3.766], tbmm: null, status: "ORANGE WIRE REPAIR", note: "Pulled. Orange sense wire needs repair. TBMM after repair." },
+  4: { smt: [3.766,3.767,3.765,3.767,3.766,3.766], tbmm: [3.750,3.755,3.753,3.755,3.753,3.753], status: "CONFIRMED", note: "All sense wires good. 5 mV PASS." },
+  5: { smt: [3.765,3.766,3.764,3.765,3.764,3.765], tbmm: [3.747,3.752,3.750,3.751,3.750,3.750], status: "CONFIRMED · REINSTALLED", note: "4–5 mV PASS." },
+  6: { smt: [3.764,3.764,3.717,3.810,3.671,3.857], tbmm: [3.750,3.753,3.752,3.754,3.753,3.752], status: "CONFIRMED · REINSTALLED", note: "New BMB. 4–5 mV PASS." },
+  7: { smt: [3.764,3.765,3.622,3.698,3.775,3.965], tbmm: [3.750,3.755,3.753,3.755,3.753,3.753], status: "CONFIRMED · REINSTALLED", note: "New BMB from Kevin. 5 mV PASS." },
+  8: { smt: [3.763,3.763,3.726,3.800,3.762,3.763], tbmm: null, status: "CONFIRMED", note: "~22.50 V, ~3.75 V cells, 4 mV PASS (exact bricks not recorded)." },
+  9: { smt: [3.767,3.767,3.723,3.811,3.673,3.862], tbmm: [3.751,3.756,3.756,3.756,3.756,3.755], status: "CONFIRMED", note: "5 mV PASS after green/brown/orange rivets." },
+  10:{ smt: [3.786,3.745,3.763,3.765,3.685,3.844], tbmm: [3.750,3.753,3.750,3.753,3.753,3.752], status: "CONFIRMED · REINSTALLED", note: "3 mV PASS after orange/green/brown rivets." },
+  11:{ smt: [3.764,3.765,3.764,3.764,3.679,3.849], tbmm: [3.749,3.753,3.752,3.752,3.751,3.751], status: "CONFIRMED · REINSTALLED", note: "4 mV PASS after orange/green rivets." },
+  12:{ smt: [3.764,3.764,3.723,3.804,3.763,3.764], tbmm: [3.749,3.752,3.752,3.753,3.751,3.751], status: "CONFIRMED · REINSTALLED", note: "4 mV PASS after orange sense wire rivet." },
+  13:{ smt: [3.765,3.765,3.764,3.765,3.765,3.765], tbmm: [3.749,3.753,3.751,3.752,3.751,3.751], status: "CONFIRMED · REINSTALLED", note: "4 mV PASS." },
+  14:{ smt: [3.764,3.763,3.764,3.764,3.764,3.764], tbmm: [3.748,3.751,3.751,3.751,3.751,3.750], status: "CONFIRMED · REINSTALLED", note: "3–4 mV PASS." },
+  15:{ smt: [3.763,3.763,3.763,3.763,3.763,3.763], tbmm: [3.747,3.751,3.751,3.751,3.750,3.750], status: "CONFIRMED · REINSTALLED", note: "4 mV PASS." },
+  16:{ smt: [3.765,3.765,3.722,3.807,3.691,3.842], tbmm: [3.750,3.753,3.752,3.753,3.752,3.755], status: "CONFIRMED · REINSTALLED", note: "5 mV PASS after green+orange repair." }
+};
+
+function brickClass(v, isTbmm) {
+  if (isTbmm) return "tbmm";
+  if (v < 3.73) return "smt-low";
+  if (v > 3.80) return "smt-high";
+  return "smt-mid";
+}
+
+const container = document.getElementById("modules");
+for (let i = 1; i <= 16; i++) {
+  const m = modules[i];
+  const smtHtml = m.smt.map((v, idx) => 
+    `<div class="brick ${brickClass(v, false)}"><span class="label">B${idx+1}</span>${v.toFixed(3)}</div>`
+  ).join("");
+  let tbmmHtml = "";
+  if (m.tbmm) {
+    tbmmHtml = m.tbmm.map((v, idx) => 
+      `<div class="brick tbmm"><span class="label">B${idx+1}</span>${v.toFixed(3)}</div>`
+    ).join("");
+  } else {
+    tbmmHtml = Array(6).fill(0).map((_, idx) => 
+      `<div class="brick missing"><span class="label">B${idx+1}</span>—</div>`
+    ).join("");
+  }
+  container.innerHTML += `
+    <div class="module">
+      <div class="module-header">
+        <span>Module ${i}</span>
+        <span class="status">${m.status}</span>
+      </div>
+      <div class="section-title">SMT</div>
+      <div class="bricks">${smtHtml}</div>
+      <div class="section-title">TBMM</div>
+      <div class="bricks">${tbmmHtml}</div>
+      <div class="note">${m.note}</div>
+    </div>
+  `;
+}
+</script>
+</body>
+</html>
