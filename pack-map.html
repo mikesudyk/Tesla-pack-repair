@@ -156,7 +156,7 @@
       <button class="module-btn green confirmed reinstalled" data-mod="5">M5<br><span class="status">CONFIRMED · Reinstalled</span></button>
       <button class="module-btn green confirmed" data-mod="4">M4<br><span class="status">CONFIRMED</span></button>
       <button class="module-btn orange" data-mod="3">M3<br><span class="status">SECOND</span></button>
-      <button class="module-btn green" data-mod="2">M2<br><span class="status">HEALTHY</span></button>
+      <button class="module-btn green confirmed" data-mod="2">M2<br><span class="status">CONFIRMED</span></button>
       <button class="module-btn green confirmed reinstalled" data-mod="1">M1<br><span class="status">CONFIRMED · Reinstalled</span></button>
     </div>
     <!-- Right row: front to rear M10→M16 -->
@@ -180,7 +180,7 @@
 <script>
 const data = {
   1: { status:"CONFIRMED · REINSTALLED", color:"green", bricks:[3.759,3.759,3.718,3.799,3.759,3.759], tbmmBricks:[3.743,3.747,3.746,3.747,3.745,3.745], smt:2, tbmm:"4 mV PASS", wires:"Orange sense wire riveted", visual:"Inspected; confirmed good; reinstalled", notes:"Orange sense wire repaired and retested (Nov 20). TBMM: 22.47 V, bricks 3.743/3.747/3.746/3.747/3.745/3.745 V, H 3.747 V / L 3.743 V, 4 mV PASS, 11.6/11.2 °C, thumbs-up. Confirmed good and reinstalled (LV + HV connectors + coolant lines connected)." },
-  2: { status:"HEALTHY", color:"green", bricks:[3.761,3.764,3.761,3.763,3.761,3.762], smt:2, tbmm:"PENDING (SMT healthy)", wires:"Not inspected", visual:"Pending", notes:"Tight/healthy SMT (2 mV). Expected PASS on TBMM." },
+  2: { status:"CONFIRMED", color:"green", bricks:[3.761,3.764,3.761,3.763,3.761,3.762], tbmmBricks:[3.745,3.751,3.748,3.751,3.747,3.748], smt:2, tbmm:"6 mV (borderline PASS)", wires:"All good (no repairs needed)", visual:"Inspected; all sense wires good; confirmed", notes:"All sense wires good. TBMM (Nov 20): 22.49 V, bricks 3.745/3.751/3.748/3.751/3.747/3.748 V, H 3.751 V / L 3.745 V, 6 mV, 11.1/11.2 °C. Borderline vs <6 mV thumbs-up threshold but considered good by owner." },
   3: { status:"SECOND", color:"orange", bricks:[3.766,3.767,3.741,3.793,3.766,3.766], smt:3, tbmm:"PENDING", wires:"Not inspected", visual:"Pending", notes:"Mild B3/B4 pair. Expected healthy." },
   4: { status:"CONFIRMED", color:"green", bricks:[3.766,3.767,3.765,3.767,3.766,3.766], tbmmBricks:[3.750,3.755,3.753,3.755,3.753,3.753], smt:3, tbmm:"5 mV PASS", wires:"All good (no repairs needed)", visual:"Inspected; all sense wires good; confirmed", notes:"All sense wires good. TBMM (Nov 20): 22.52 V, bricks 3.750/3.755/3.753/3.755/3.753/3.753 V, H 3.755 V / L 3.750 V, 5 mV PASS, 11.4/11.2 °C, thumbs-up. Confirmed good." },
   5: { status:"CONFIRMED · REINSTALLED", color:"green", bricks:[3.765,3.766,3.764,3.765,3.764,3.765], tbmmBricks:[3.747,3.752,3.750,3.751,3.750,3.750], smt:2, tbmm:"4–5 mV PASS", wires:"Inspected (no repairs noted)", visual:"Inspected; confirmed good; reinstalled", notes:"TBMM (Nov 20): 22.50 V, bricks 3.747/3.752/3.750/3.751/3.750/3.750 V, H 3.752 V / L 3.747 V, 4–5 mV PASS, 9.8/9.7 °C. Variance (30 sec, 7 readings): max 1 mV (0 cells >5 mV). Confirmed good and reinstalled (LV + HV connectors + coolant lines connected)." },
